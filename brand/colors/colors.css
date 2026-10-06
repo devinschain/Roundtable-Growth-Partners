@@ -1,0 +1,11 @@
+:root{
+  --slate:#24313A; /* Primary: headings, nav, dark sections */
+  --deep-slate:#141D23; /* Footer, deepest background */
+  --teal:#176F73; /* Accent: buttons, links, key actions */
+  --teal-light:#5CC4C8; /* Accent on dark backgrounds */
+  --amber:#E3A52B; /* Highlights and focus ring only; use dark text on it */
+  --cloud:#F2F5F6; /* Page background */
+  --steel:#5B6B75; /* Secondary body text */
+  --line:#DCE3E6; /* Borders and dividers */
+  --white:#FFFFFF; /* Cards, text on dark */
+}

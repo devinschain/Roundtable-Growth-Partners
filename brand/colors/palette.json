@@ -1,0 +1,54 @@
+{
+  "name": "Slate & Signal Teal",
+  "colors": [
+    {
+      "name": "Slate",
+      "hex": "#24313A",
+      "role": "Primary: headings, nav, dark sections"
+    },
+    {
+      "name": "Deep Slate",
+      "hex": "#141D23",
+      "role": "Footer, deepest background"
+    },
+    {
+      "name": "Teal",
+      "hex": "#176F73",
+      "role": "Accent: buttons, links, key actions"
+    },
+    {
+      "name": "Teal Light",
+      "hex": "#5CC4C8",
+      "role": "Accent on dark backgrounds"
+    },
+    {
+      "name": "Amber",
+      "hex": "#E3A52B",
+      "role": "Highlights and focus ring only; use dark text on it"
+    },
+    {
+      "name": "Cloud",
+      "hex": "#F2F5F6",
+      "role": "Page background"
+    },
+    {
+      "name": "Steel",
+      "hex": "#5B6B75",
+      "role": "Secondary body text"
+    },
+    {
+      "name": "Line",
+      "hex": "#DCE3E6",
+      "role": "Borders and dividers"
+    },
+    {
+      "name": "White",
+      "hex": "#FFFFFF",
+      "role": "Cards, text on dark"
+    }
+  ],
+  "fonts": {
+    "headings": "Fraunces (fallback Georgia)",
+    "body": "Inter (fallback system sans)"
+  }
+}
