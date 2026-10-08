@@ -65,3 +65,14 @@ footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;a
 .menu{display:block}nav{position:absolute;left:0;right:0;top:72px;background:var(--cloud);border-bottom:1px solid var(--line);display:none}nav.open{display:block}nav ul{flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px}}
 @media(max-width:560px){body{font-size:16px}section{padding:60px 0}.hero{padding:56px 0}.offers,.team,.proof,.steps{grid-template-columns:1fr}.step{border-right:0!important;border-bottom:1px solid #3b4a54}.step:last-child{border:0}.brand small{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+.pillars a{display:block;text-decoration:none;color:var(--slate);border-top:3px solid var(--teal);padding-top:10px}
+.pillars a:hover b{color:var(--teal)}
+.pillars b{display:block;font-family:var(--serif);font-size:1.1rem}
+.pillars span{display:block;font-size:.88rem;color:var(--steel);margin-top:2px}
+.card{scroll-margin-top:96px}
+.card .tag{font-weight:600;color:var(--slate);font-size:1.02rem;margin-top:6px}
+.card ul li{margin-bottom:8px}.card ul li b{color:var(--slate)}
+@media(max-width:1040px){nav ul{gap:20px}.menu{display:block}nav{position:absolute;left:0;right:0;top:72px;background:var(--cloud);border-bottom:1px solid var(--line);display:none}nav.open{display:block}nav ul{flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px}}
+@media(max-width:560px){.pillars{grid-template-columns:1fr}}
