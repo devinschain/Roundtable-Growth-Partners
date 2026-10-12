@@ -16,8 +16,8 @@ header.site{position:sticky;top:0;z-index:20;background:rgba(242,245,246,.93);ba
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--slate)}
 .brand svg{width:50px;height:50px}.brand b{font-family:var(--serif);font-size:1.28rem;display:block;line-height:1.05}
 .brand small{display:block;font-size:.62rem;letter-spacing:.24em;color:var(--teal);font-weight:700;margin-top:3px}
-nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;align-items:center}
-nav a{text-decoration:none;color:var(--slate);font-weight:500;font-size:.95rem}nav a:hover{color:var(--teal)}
+nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
+nav a{text-decoration:none;color:var(--slate);font-weight:500;font-size:.88rem}nav a:hover{color:var(--teal)}
 nav a[aria-current="page"]{color:var(--teal)}
 .btn{display:inline-block;background:var(--teal);color:#fff!important;padding:13px 22px;border-radius:6px;text-decoration:none;font-weight:600;font-size:.98rem;border:2px solid var(--teal);transition:background .15s,transform .15s}
 .btn:hover{background:#0f5a5e;border-color:#0f5a5e}.btn.ghost{background:transparent;color:var(--slate)!important;border-color:var(--slate)}.btn.ghost:hover{background:var(--slate);color:#fff!important}
@@ -75,7 +75,8 @@ footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;a
 .card{scroll-margin-top:96px}
 .card .tag{font-weight:600;color:var(--slate);font-size:1.02rem;margin-top:6px}
 .card ul li{margin-bottom:8px}.card ul li b{color:var(--slate)}
-@media(max-width:1040px){nav ul{gap:20px}.menu{display:block}nav{position:absolute;left:0;right:0;top:72px;background:var(--cloud);border-bottom:1px solid var(--line);display:none}nav.open{display:block}nav ul{flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px}}
+@media(max-width:1200px){nav ul{gap:14px}nav a{font-size:.84rem}.btn.sm{padding:8px 12px;font-size:.82rem}}
+@media(max-width:1040px){.menu{display:block}nav{position:absolute;left:0;right:0;top:72px;background:var(--cloud);border-bottom:1px solid var(--line);display:none}nav.open{display:block}nav ul{flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px}}
 @media(max-width:560px){.pillars{grid-template-columns:1fr}}
 /* case studies — shared stats grid */
 .cs-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
