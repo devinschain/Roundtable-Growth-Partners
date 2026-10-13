@@ -75,8 +75,8 @@ footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;a
 .card{scroll-margin-top:96px}
 .card .tag{font-weight:600;color:var(--slate);font-size:1.02rem;margin-top:6px}
 .card ul li{margin-bottom:8px}.card ul li b{color:var(--slate)}
-@media(max-width:1200px){nav ul{gap:14px}nav a{font-size:.84rem}.btn.sm{padding:8px 12px;font-size:.82rem}}
-@media(max-width:1040px){.menu{display:block}nav{position:absolute;left:0;right:0;top:72px;background:var(--cloud);border-bottom:1px solid var(--line);display:none}nav.open{display:block}nav ul{flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px}}
+
+@media(max-width:1280px){.menu{display:block}nav{position:absolute;left:0;right:0;top:72px;background:var(--cloud);border-bottom:1px solid var(--line);display:none}nav.open{display:block}nav ul{flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px}}
 @media(max-width:560px){.pillars{grid-template-columns:1fr}}
 /* case studies — shared stats grid */
 .cs-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
