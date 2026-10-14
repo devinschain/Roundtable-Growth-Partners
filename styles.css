@@ -16,8 +16,8 @@ header.site{position:sticky;top:0;z-index:20;background:rgba(242,245,246,.93);ba
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--slate)}
 .brand svg{width:50px;height:50px}.brand b{font-family:var(--serif);font-size:1.28rem;display:block;line-height:1.05}
 .brand small{display:block;font-size:.62rem;letter-spacing:.24em;color:var(--teal);font-weight:700;margin-top:3px}
-nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
-nav a{text-decoration:none;color:var(--slate);font-weight:500;font-size:.88rem}nav a:hover{color:var(--teal)}
+nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0;align-items:center}
+nav a{text-decoration:none;color:var(--slate);font-weight:500;font-size:.88rem;white-space:nowrap}nav a:hover{color:var(--teal)}
 nav a[aria-current="page"]{color:var(--teal)}
 .btn{display:inline-block;background:var(--teal);color:#fff!important;padding:13px 22px;border-radius:6px;text-decoration:none;font-weight:600;font-size:.98rem;border:2px solid var(--teal);transition:background .15s,transform .15s}
 .btn:hover{background:#0f5a5e;border-color:#0f5a5e}.btn.ghost{background:transparent;color:var(--slate)!important;border-color:var(--slate)}.btn.ghost:hover{background:var(--slate);color:#fff!important}
