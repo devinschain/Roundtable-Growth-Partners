@@ -87,6 +87,7 @@ footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;a
 /* homepage teaser cards */
 .cs-teaser{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .cs-tcard{background:var(--cloud);border:1px solid var(--line);border-radius:12px;padding:26px;border-top:4px solid var(--teal)}
+.cs-pillar{display:inline-block;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal);background:rgba(23,111,115,.08);border-radius:999px;padding:4px 11px;margin:0 0 14px}
 .cs-tname{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--slate);margin:0 0 4px}
 .cs-ttag{font-size:.9rem;color:var(--steel);margin:0 0 0}
 /* case studies page */
