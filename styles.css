@@ -80,7 +80,7 @@ footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;a
 
 @media(max-width:1440px){.menu{display:block}nav{position:absolute;left:0;right:0;top:72px;background:var(--cloud);border-bottom:1px solid var(--line);display:none}nav.open{display:block}nav ul{flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px}}
 @media(max-width:560px){.pillars{grid-template-columns:1fr}}
-/* case studies — shared stats grid */
+/* case studies - shared stats grid */
 .cs-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
 .cs-stats b{font-family:var(--serif);font-size:1.5rem;color:var(--teal);display:block;line-height:1.1}
 .cs-stats span{font-size:.82rem;color:var(--steel);display:block;margin-top:3px}
