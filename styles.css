@@ -25,7 +25,7 @@ nav a[aria-current="page"]{color:var(--teal)}
 .menu{display:none;background:none;border:2px solid var(--slate);border-radius:6px;padding:8px 12px;font:inherit;font-weight:600;color:var(--slate);cursor:pointer}
 /* hero */
 .hero{padding:84px 0 72px;background:linear-gradient(180deg,var(--cloud),#fff)}
-.hero .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1fr .82fr;gap:56px;align-items:center;margin-top:30px}
 .hero h1{margin-bottom:22px}.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
 .sectors{margin-top:26px;font-size:.92rem;color:var(--steel)}.sectors b{color:var(--slate)}
 .table-fig{max-width:430px;margin-left:auto;width:100%}
@@ -64,7 +64,7 @@ section{padding:84px 0}.alt{background:#fff}.dark{background:var(--slate);color:
 .cta-band .btn{background:#fff;color:var(--slate)!important;border-color:#fff}.cta-band .btn:hover{background:var(--cloud)}
 footer{background:var(--deep);color:#9FB0B8;padding:48px 0;font-size:.92rem}
 footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}footer a{color:#CFE0E3}footer b{color:#fff;font-family:var(--serif);font-size:1.15rem}
-@media(max-width:920px){.hero .grid,.story{grid-template-columns:1fr;gap:36px}.table-fig{margin:auto}.cards{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid #3b4a54}.offers,.team,.proof{grid-template-columns:1fr 1fr}
+@media(max-width:920px){.hero-grid,.story{grid-template-columns:1fr;gap:36px}.table-fig{margin:auto}.cards{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid #3b4a54}.offers,.team,.proof{grid-template-columns:1fr 1fr}
 .menu{display:block}nav{position:absolute;left:0;right:0;top:72px;background:var(--cloud);border-bottom:1px solid var(--line);display:none}nav.open{display:block}nav ul{flex-direction:column;align-items:flex-start;padding:18px 24px;gap:16px}}
 @media(max-width:560px){body{font-size:16px}section{padding:60px 0}.hero{padding:56px 0}.offers,.team,.proof,.steps{grid-template-columns:1fr}.step{border-right:0!important;border-bottom:1px solid #3b4a54}.step:last-child{border:0}.brand small{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
