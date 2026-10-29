@@ -1,5 +1,5 @@
 :root{--slate:#24313A;--deep:#141D23;--teal:#176F73;--teal-l:#5CC4C8;--amber:#E3A52B;--cloud:#F2F5F6;--steel:#5B6B75;--line:#DCE3E6;--white:#fff;
---serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--max:1120px}
+--serif:"Spectral",Georgia,"Times New Roman",serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--max:1120px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;font-family:var(--sans);color:var(--slate);background:var(--cloud);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
 img,svg{max-width:100%;display:block}a{color:var(--teal)}
