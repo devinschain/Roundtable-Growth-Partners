@@ -12,7 +12,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=3">
+<script>document.documentElement.className+=" js"</script><link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -64,8 +64,15 @@
   <div class="cards">
     <div class="pillar"><span class="pillar-badge">1</span><article class="card" id="testing"><h3>Testing</h3><p class="tag">Know before you grow.</p><p>Testing replaces opinion with evidence. We start small, in the market, so you learn what customers will actually buy before adding people or spending significant capital.</p><ul><li><b>Empirical:</b> measurable results against a baseline, with the decision rule set in advance.</li><li><b>Fast:</b> answers in weeks, not quarters.</li><li><b>Lean:</b> minimal cost and headcount until the idea is proven.</li><li><b>Pilots:</b> anecdotal and directional, they show how customers and teams respond in practice.</li><li><b>Safe to fail:</b> weak ideas stop early, and strong ones earn the investment.</li></ul></article></div>
     <div class="pillar"><span class="pillar-badge">2</span><article class="card" id="partnerships"><h3>Partnerships</h3><p class="tag">Double down on what you do best.</p><p>Strategic alliances pair your strengths with a partner's assets, so you can grow faster without building everything yourself.</p><ul><li><b>Speed:</b> reach new customers, channels or capabilities in weeks.</li><li><b>Lower cost:</b> share investment and infrastructure instead of carrying it alone.</li><li><b>Less risk and liability:</b> staged, scoped commitments, with exposure allocated by agreement.</li><li><b>Focus:</b> lead where your organization is great, and let partners cover the rest.</li><li><b>Three keys:</b> shared values, complementary skills and resources, and above all, alignment.</li></ul></article></div>
-    <div class="pillar"><span class="pillar-badge">3</span><article class="card" id="acquisitions"><h3>Acquisitions</h3><p class="tag">Buy momentum, not complexity.</p><p>A tuck-in adds a product, customer base, team or capability to what you already do. Smaller deals close faster and carry less risk, and early wins create momentum for the next step.</p><ul><li><b>Easier to close:</b> smaller, simpler and quicker to diligence and negotiate.</li><li><b>Less risk:</b> smaller checks, a known fit and a bounded downside.</li><li><b>Speed:</b> buy capability and customers instead of building them.</li><li><b>Full process:</b> we help identify targets, finance, price and structure the deal, and build alignment through integration.</li><li><b>Repeatable:</b> a proven playbook, so each deal is easier than the last.</li></ul></article></div>
+    <div class="pillar"><span class="pillar-badge">3</span><article class="card" id="acquisitions"><h3>Acquisitions</h3><p class="tag">Buy momentum, not complexity.</p><p>A tuck-in adds a product, customer base, team or capability to what you already do. Smaller deals close faster and carry less risk, and early wins create momentum for the next step.</p><ul><li><b>Sourcing:</b> proprietary deal flow from a deep network of organizations and operators, not just brokered processes.</li><li><b>Easier to close:</b> smaller, simpler and quicker to diligence and negotiate.</li><li><b>Less risk:</b> smaller checks, a known fit and a bounded downside.</li><li><b>Speed:</b> buy capability and customers instead of building them.</li><li><b>Full process:</b> we help identify targets, finance, price and structure the deal, and build alignment through integration.</li><li><b>Repeatable:</b> a proven playbook, so each deal is easier than the last.</li></ul></article></div>
   </div>
+</div></section>
+
+<section class="quote-band"><div class="wrap">
+  <p class="qmark">&ldquo;</p>
+  <blockquote>I would rather have great distribution and a fair product than a great product and fair distribution.</blockquote>
+  <cite>Reid Hoffman, co-founder of LinkedIn</cite>
+  <p class="quote-note">If you are going to design a product, do it with distribution in mind.</p>
 </div></section>
 
 <section class="dark" id="approach"><div class="wrap">
@@ -182,5 +189,12 @@ const b=document.querySelector('.menu'),n=document.getElementById('nav');
 b.addEventListener('click',()=>{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)});
 n.addEventListener('click',e=>{if(e.target.tagName==='A'){n.classList.remove('open');b.setAttribute('aria-expanded',false)}});
 document.getElementById('y').textContent=new Date().getFullYear();
+(function(){
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var sel='.head,.card,.seat,.step,.cs-tcard,.offer,.story figure,.story>div,.flow-fig,.quote-band .wrap';
+  var els=[].slice.call(document.querySelectorAll(sel));
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el){el.classList.add('reveal');var i=el.parentNode?[].indexOf.call(el.parentNode.children,el):0;el.style.transitionDelay=((i%4)*70)+'ms';io.observe(el);});
+})();
 </script>
 </body></html>
