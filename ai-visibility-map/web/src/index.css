@@ -1,0 +1,5 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+body { @apply bg-cloud text-slate-rgp font-sans antialiased; }
+h1,h2,h3 { @apply font-serif font-semibold; }
+.card { @apply bg-white border border-line rounded-xl p-5; }
+@media print { .no-print { display: none !important; } body { background: #fff; } .card { break-inside: avoid; } }

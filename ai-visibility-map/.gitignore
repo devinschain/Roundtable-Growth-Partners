@@ -1,0 +1,8 @@
+# Internal data and outputs never go to GitHub
+data/
+*.csv
+*.xlsx
+.env
+.env.*
+node_modules/
+dist/

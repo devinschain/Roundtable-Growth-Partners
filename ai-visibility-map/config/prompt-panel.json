@@ -1,0 +1,17 @@
+{
+  "version": "0.1",
+  "repeats_per_prompt": 3,
+  "engines": ["chatgpt", "gemini", "perplexity", "claude"],
+  "prompts": [
+    {"id": "P01", "type": "discovery",  "text": "What are the best {industry} companies in {city}?"},
+    {"id": "P02", "type": "discovery",  "text": "Which {industry} firms in {city} would you recommend for a mid-sized business?"},
+    {"id": "P03", "type": "discovery",  "text": "Who are the leading {industry} providers near {city}?"},
+    {"id": "P04", "type": "comparison", "text": "Compare the top {industry} companies in {city}. Who stands out and why?"},
+    {"id": "P05", "type": "comparison", "text": "Is {brand} a good choice for {industry} in {city}, or are there better options?"},
+    {"id": "P06", "type": "reputation", "text": "What is {brand} known for?"},
+    {"id": "P07", "type": "reputation", "text": "What do customers say about {brand}? Any strengths or complaints?"},
+    {"id": "P08", "type": "decision",   "text": "I need a {industry} partner in {city}. Give me a shortlist of 5 with one line each."},
+    {"id": "P09", "type": "decision",   "text": "Who should I avoid or double check in {industry} in {city}, and why?"},
+    {"id": "P10", "type": "alternative","text": "What are good alternatives to {brand}?"}
+  ]
+}

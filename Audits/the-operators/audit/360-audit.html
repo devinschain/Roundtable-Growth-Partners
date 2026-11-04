@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Strategic Audit | The Operators</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+:root {
+  --bg:#0d0d0d; --bg-elevated:#161616; --bg-card:#1a1a1a; --bg-card-hover:#1f1f1f;
+  --border:rgba(255,255,255,0.08); --border-hover:rgba(255,255,255,0.15);
+  --text:#fff; --text-secondary:#a0a0a0; --text-muted:#666;
+  --brand:#C9A368; --brand-glow:rgba(201,163,104,0.15); --brand-deep:#A38346;
+  --accent:#f59e0b; --accent-glow:rgba(245,158,11,0.15);
+  --success:#22c55e; --success-glow:rgba(34,197,94,0.15);
+  --warning:#eab308; --error:#ef4444; --error-glow:rgba(239,68,68,0.12);
+  --gradient-brand:linear-gradient(135deg,#C9A368 0%,#A38346 100%);
+  --gradient-accent:linear-gradient(135deg,#f59e0b 0%,#d97706 100%);
+  --radius:20px; --radius-sm:12px; --radius-xs:8px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Plus Jakarta Sans',-apple-system,system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; font-size:15px; -webkit-font-smoothing:antialiased; }
+::selection { background:var(--brand); color:#0d0d0d; }
+.app { display:flex; min-height:100vh; }
+
+.sidebar { width:300px; background:var(--bg); position:fixed; top:0; left:0; height:100vh; display:flex; flex-direction:column; border-right:1px solid var(--border); z-index:100; transition:transform .4s cubic-bezier(.16,1,.3,1); }
+.sidebar-header { padding:40px 28px 32px; }
+.logo { display:flex; align-items:center; gap:14px; margin-bottom:32px; }
+.logo-img { height:36px; width:auto; max-width:180px; object-fit:contain;  }
+.logo-text { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--text-secondary); }
+.sidebar-title { font-size:22px; font-weight:800; color:var(--text); letter-spacing:-.5px; line-height:1.2; }
+.sidebar-meta { display:flex; align-items:center; gap:8px; margin-top:12px; font-size:13px; color:var(--text-muted); }
+.meta-dot { width:6px; height:6px; background:var(--success); border-radius:50%; box-shadow:0 0 12px var(--success); }
+
+.nav { flex:1; padding:0 16px; overflow-y:auto; }
+.nav-group { margin-bottom:28px; }
+.nav-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:var(--text-muted); padding:0 12px; margin-bottom:8px; }
+.nav-item { display:flex; align-items:center; gap:14px; padding:12px 16px; border-radius:var(--radius-sm); color:var(--text-secondary); cursor:pointer; transition:all .2s ease; position:relative; margin-bottom:4px; }
+.nav-item:hover { color:var(--text); background:rgba(255,255,255,.04); }
+.nav-item.active { color:var(--text); background:var(--brand-glow); }
+.nav-item.active::before { content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:3px; height:24px; background:var(--brand); border-radius:0 4px 4px 0; box-shadow:0 0 20px var(--brand); }
+.nav-icon { width:20px; height:20px; opacity:.7; flex-shrink:0; }
+.nav-item.active .nav-icon { opacity:1; color:var(--brand); }
+.nav-text { font-size:14px; font-weight:500; }
+
+.sidebar-footer { padding:24px 28px; border-top:1px solid var(--border); }
+.footer-brand { font-size:12px; font-weight:600; color:var(--text-muted); }
+.footer-brand strong { color:var(--brand); }
+
+.main { flex:1; margin-left:300px; }
+.content { max-width:1100px; margin:0 auto; padding:48px 56px 120px; }
+.section { display:none; animation:slideUp .5s cubic-bezier(.16,1,.3,1); }
+.section.active { display:block; }
+@keyframes slideUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+.section-header { margin-bottom:48px; }
+.section-badge { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; background:var(--brand-glow); border:1px solid var(--brand); border-color:rgba(255,255,255,.15); border-radius:100px; font-size:12px; font-weight:600; color:var(--brand); margin-bottom:20px; }
+.section-title { font-size:44px; font-weight:800; color:var(--text); letter-spacing:-1.2px; line-height:1.1; margin-bottom:16px; }
+.section-desc { font-size:17px; color:var(--text-secondary); line-height:1.7; max-width:640px; }
+
+.insight-card { background:linear-gradient(135deg,rgba(201,163,104,0.08) 0%,rgba(201,163,104,0.02) 100%); border:1px solid var(--brand-glow); border-radius:var(--radius); padding:32px 36px; margin-bottom:36px; position:relative; }
+.insight-card::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--gradient-brand); border-radius:4px 0 0 4px; }
+.insight-badge { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--brand); margin-bottom:14px; }
+.insight-badge::before { content:''; width:8px; height:8px; background:var(--brand); border-radius:50%; box-shadow:0 0 12px var(--brand); }
+.insight-text { font-size:17px; color:var(--text); line-height:1.75; }
+.insight-text strong { color:var(--brand); font-weight:600; }
+
+.bento { display:grid; gap:16px; }
+.bento-4 { grid-template-columns:repeat(4,1fr); }
+.bento-3 { grid-template-columns:repeat(3,1fr); }
+.bento-2 { grid-template-columns:repeat(2,1fr); }
+@media (max-width:1000px) { .bento-4,.bento-3 { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:700px) { .bento-4,.bento-3,.bento-2 { grid-template-columns:1fr; } }
+
+.stat-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:24px; position:relative; overflow:hidden; }
+.stat-card::after { content:''; position:absolute; top:-50%; right:-50%; width:100%; height:100%; background:radial-gradient(circle,var(--brand-glow) 0%,transparent 70%); pointer-events:none; }
+.stat-label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:10px; }
+.stat-value { font-size:36px; font-weight:800; color:var(--text); letter-spacing:-1px; line-height:1; }
+.stat-context { font-size:13px; color:var(--text-secondary); margin-top:8px; }
+
+.list-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.list-header { padding:18px 24px; border-bottom:1px solid var(--border); background:rgba(255,255,255,.02); display:flex; align-items:center; gap:12px; }
+.list-header i { color:var(--brand); width:18px; height:18px; }
+.list-header.warn i { color:var(--error); }
+.list-title { font-size:14px; font-weight:700; color:var(--text); letter-spacing:-.2px; }
+.list-item { display:flex; gap:16px; padding:18px 24px; border-bottom:1px solid var(--border); transition:background .2s ease; }
+.list-item:last-child { border-bottom:none; }
+.list-item:hover { background:rgba(255,255,255,.02); }
+.list-num { font-size:12px; font-weight:800; color:var(--brand); min-width:22px; }
+.list-card.warn .list-num { color:var(--error); }
+.list-content h4 { font-size:14px; font-weight:600; color:var(--text); margin-bottom:4px; }
+.list-content p { font-size:13px; color:var(--text-secondary); line-height:1.6; }
+
+.feature-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px; transition:all .3s ease; }
+.feature-card:hover { border-color:var(--border-hover); transform:translateY(-3px); }
+.feature-icon { width:48px; height:48px; border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; margin-bottom:18px; background:var(--brand-glow); border:1px solid var(--brand-glow); }
+.feature-icon i { color:var(--brand); width:22px; height:22px; }
+.feature-icon.accent { background:var(--accent-glow); border-color:rgba(245,158,11,.2); }
+.feature-icon.accent i { color:var(--accent); }
+.feature-title { font-size:17px; font-weight:700; color:var(--text); margin-bottom:10px; letter-spacing:-.3px; }
+.feature-desc { font-size:14px; color:var(--text-secondary); line-height:1.7; }
+.feature-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.tag { font-size:11px; font-weight:600; padding:5px 11px; background:rgba(255,255,255,.05); border:1px solid var(--border); border-radius:100px; color:var(--text-secondary); }
+.tag.brand { background:var(--brand-glow); border-color:var(--brand-glow); color:var(--brand); }
+.tag.accent { background:var(--accent-glow); border-color:rgba(245,158,11,.3); color:var(--accent); }
+
+.persona-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width:800px) { .persona-grid { grid-template-columns:1fr; } }
+.persona { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.persona-header { padding:28px 32px; background:var(--gradient-brand); position:relative; }
+.persona-header.alt { background:var(--gradient-accent); }
+.persona-header::after { content:''; position:absolute; top:0; right:0; width:150px; height:150px; background:radial-gradient(circle,rgba(255,255,255,.2) 0%,transparent 70%); }
+.persona-name { font-size:22px; font-weight:800; color:#0d0d0d; margin-bottom:4px; letter-spacing:-.3px; }
+.persona-header.alt .persona-name { color:#fff; }
+.persona-role { font-size:14px; color:rgba(0,0,0,.7); }
+.persona-header.alt .persona-role { color:rgba(255,255,255,.85); }
+.persona-body { padding:24px 32px; }
+.persona-section { margin-bottom:22px; }
+.persona-section:last-child { margin-bottom:0; }
+.persona-section-title { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--text-muted); margin-bottom:12px; }
+.persona-list { list-style:none; }
+.persona-list li { font-size:14px; color:var(--text-secondary); padding:8px 0 8px 18px; position:relative; border-bottom:1px solid var(--border); }
+.persona-list li:last-child { border-bottom:none; }
+.persona-list li::before { content:''; position:absolute; left:0; top:14px; width:6px; height:6px; background:var(--brand); border-radius:50%; }
+.persona.alt .persona-list li::before { background:var(--accent); }
+
+.opp-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px; display:grid; grid-template-columns:56px 1fr auto; gap:24px; align-items:start; transition:all .3s ease; margin-bottom:16px; }
+.opp-card:hover { border-color:var(--border-hover); transform:translateY(-3px); }
+.opp-rank { width:56px; height:56px; border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:800; color:#0d0d0d; }
+.opp-rank.p1 { background:var(--gradient-brand); box-shadow:0 8px 24px var(--brand-glow); }
+.opp-rank.p2 { background:var(--gradient-accent); box-shadow:0 8px 24px var(--accent-glow); color:#fff; }
+.opp-rank.p3 { background:linear-gradient(135deg,#14b8a6 0%,#0d9488 100%); color:#fff; }
+.opp-rank.p4 { background:linear-gradient(135deg,#8b5cf6 0%,#7c3aed 100%); color:#fff; }
+.opp-rank.p5 { background:linear-gradient(135deg,#555 0%,#333 100%); color:#fff; }
+.opp-content h4 { font-size:17px; font-weight:700; color:var(--text); margin-bottom:8px; letter-spacing:-.2px; }
+.opp-content p { font-size:14px; color:var(--text-secondary); line-height:1.7; }
+.opp-meta { display:flex; flex-direction:column; gap:12px; min-width:100px; }
+.opp-meta-item { text-align:right; }
+.opp-meta-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); }
+.opp-meta-value { font-size:13px; font-weight:600; color:var(--text); margin-top:2px; }
+@media (max-width:800px) { .opp-card { grid-template-columns:1fr; } .opp-meta { flex-direction:row; flex-wrap:wrap; } .opp-meta-item { text-align:left; } }
+
+.table-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+table { width:100%; border-collapse:collapse; }
+th { padding:14px 22px; text-align:left; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); background:rgba(255,255,255,.02); border-bottom:1px solid var(--border); }
+td { padding:16px 22px; font-size:14px; color:var(--text); border-bottom:1px solid var(--border); }
+tr:last-child td { border-bottom:none; }
+tr:hover td { background:rgba(255,255,255,.02); }
+.td-bold { font-weight:600; }
+.td-muted { color:var(--text-secondary); }
+
+.subsection { margin-bottom:40px; }
+.subsection-title { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--text-muted); margin-bottom:18px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+
+.swot-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:800px) { .swot-grid { grid-template-columns:1fr; } }
+.swot { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.swot-header { padding:18px 24px; font-size:14px; font-weight:700; color:#fff; display:flex; align-items:center; gap:10px; }
+.swot-header i { width:18px; height:18px; }
+.swot.s .swot-header { background:var(--gradient-brand); color:#0d0d0d; }
+.swot.w .swot-header { background:linear-gradient(90deg,#ef4444,#b91c1c); }
+.swot.o .swot-header { background:linear-gradient(90deg,#f59e0b,#d97706); }
+.swot.t .swot-header { background:linear-gradient(90deg,#6366f1,#4338ca); }
+.swot-body { padding:22px 24px; }
+.swot-list { list-style:none; }
+.swot-list li { font-size:14px; color:var(--text-secondary); padding:10px 0 10px 18px; position:relative; border-bottom:1px solid var(--border); }
+.swot-list li:last-child { border-bottom:none; }
+.swot-list li::before { content:''; position:absolute; left:0; top:16px; width:6px; height:6px; background:currentColor; border-radius:50%; opacity:.6; }
+
+.src { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 9px; border-radius:100px; margin-left:8px; vertical-align:middle; white-space:nowrap; }
+.src::before { content:''; width:5px; height:5px; border-radius:50%; }
+.src.v { background:rgba(34,197,94,.10); color:var(--success); border:1px solid rgba(34,197,94,.25); }
+.src.v::before { background:var(--success); box-shadow:0 0 6px var(--success); }
+.src.i { background:rgba(245,158,11,.10); color:var(--accent); border:1px solid rgba(245,158,11,.25); }
+.src.i::before { background:var(--accent); box-shadow:0 0 6px var(--accent); }
+.src-block { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; border-radius:6px; display:inline-block; margin-bottom:8px; }
+.src-block.v { background:rgba(34,197,94,.10); color:var(--success); border:1px solid rgba(34,197,94,.25); }
+.src-block.i { background:rgba(245,158,11,.10); color:var(--accent); border:1px solid rgba(245,158,11,.25); }
+
+.legend { display:flex; flex-wrap:wrap; gap:12px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px 18px; margin-bottom:28px; font-size:12px; color:var(--text-secondary); align-items:center; }
+.legend-label { font-weight:700; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:.1em; margin-right:4px; }
+.legend-item { display:inline-flex; align-items:center; gap:8px; }
+.legend-dot { width:8px; height:8px; border-radius:50%; }
+.legend-dot.v { background:var(--success); box-shadow:0 0 8px var(--success); }
+.legend-dot.i { background:var(--accent); box-shadow:0 0 8px var(--accent); }
+
+.next-step { display:flex; align-items:flex-start; gap:14px; background:rgba(245,158,11,.06); border:1px solid rgba(245,158,11,.2); border-radius:var(--radius-sm); padding:16px 20px; margin-top:18px; }
+.next-step i { color:var(--accent); width:18px; height:18px; flex-shrink:0; margin-top:2px; }
+.next-step-text { font-size:14px; color:var(--text); line-height:1.7; }
+.next-step-text strong { color:var(--accent); font-weight:700; }
+
+.mobile-toggle { display:none; position:fixed; top:16px; left:16px; z-index:200; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:8px; cursor:pointer; color:var(--text); }
+.overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:90; }
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); } .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; } .content { padding:80px 24px 80px; }
+  .mobile-toggle { display:block; } .overlay.open { display:block; }
+  .section-title { font-size:32px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+<button class="mobile-toggle" onclick="toggleSidebar()"><i data-lucide="menu"></i></button>
+<div class="overlay" onclick="toggleSidebar()"></div>
+
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <img class="logo-img" src="https://theoperators.pe/wp-content/uploads/2023/03/The-Operators.png" alt="The Operators">
+    </div>
+    <div class="logo-text" style="margin-bottom:12px;">Strategic Audit</div>
+    <h1 class="sidebar-title">The Operators</h1>
+    <div class="sidebar-meta"><span class="meta-dot"></span><span>November 2026</span></div>
+  </div>
+  <nav class="nav">
+    <div class="nav-group">
+      <div class="nav-label">Overview</div>
+      <div class="nav-item active" data-section="summary"><i class="nav-icon" data-lucide="layout-dashboard"></i><span class="nav-text">Executive Summary</span></div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Analysis</div>
+      <div class="nav-item" data-section="product"><i class="nav-icon" data-lucide="package"></i><span class="nav-text">Product Analysis</span></div>
+      <div class="nav-item" data-section="icp"><i class="nav-icon" data-lucide="users"></i><span class="nav-text">Ideal Customer</span></div>
+      <div class="nav-item" data-section="ipp"><i class="nav-icon" data-lucide="handshake"></i><span class="nav-text">Ideal Partner</span></div>
+      <div class="nav-item" data-section="business"><i class="nav-icon" data-lucide="briefcase"></i><span class="nav-text">Business Model</span></div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Strategy</div>
+      <div class="nav-item" data-section="opportunities"><i class="nav-icon" data-lucide="zap"></i><span class="nav-text">Opportunities</span></div>
+      <div class="nav-item" data-section="swot"><i class="nav-icon" data-lucide="layout-grid"></i><span class="nav-text">SWOT</span></div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Digital Playbook</div>
+      <div class="nav-item" data-section="paid-media"><i class="nav-icon" data-lucide="megaphone"></i><span class="nav-text">Paid Media</span></div>
+      <div class="nav-item" data-section="organic-growth"><i class="nav-icon" data-lucide="search"></i><span class="nav-text">Organic Growth</span></div>
+      <div class="nav-item" data-section="retention"><i class="nav-icon" data-lucide="repeat"></i><span class="nav-text">Retention &amp; Partners</span></div>
+      <div class="nav-item" data-section="budget"><i class="nav-icon" data-lucide="calculator"></i><span class="nav-text">Budget &amp; Allocation</span></div>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="footer-brand">Prepared by <strong>Marketive</strong></div>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="content">
+    
+<section id="summary" class="section active">
+  <div class="section-header">
+    <div class="section-badge">Overview</div>
+    <h1 class="section-title">Executive Summary</h1>
+    <p class="section-desc">A strategic assessment of The Operators (theoperators.pe) &mdash; a dedicated collaborative community for PE-backed executives and Operating Partners, founded by Kit Lisle (also founder of Strategic Growth Council). Combines a membership platform, peer councils, events, bootcamps, coaching, and a curated introductions engine purpose-built for the private-equity ecosystem.</p>
+  </div>
+  <div class="legend">
+<span class="legend-label">How to read this audit</span>
+<span class="legend-item"><span class="legend-dot v"></span> <strong style="color:var(--success);">Sourced</strong> &mdash; verified from theoperators.pe or public pages</span>
+<span class="legend-item"><span class="legend-dot i"></span> <strong style="color:var(--accent);">Inferred</strong> &mdash; analyst inference from market patterns &middot; to validate in kickoff</span>
+</div>
+<div class="insight-card">
+<div class="insight-badge">Primary Finding</div>
+<p class="insight-text">The Operators sits in a structurally defensible niche &mdash; <strong>the only community purpose-built for PE-backed executives and Operating Partners, anchored by Kit Lisle&rsquo;s 20+ year Strategic Growth Council heritage, with a clever &ldquo;.pe&rdquo; domain that reads as both country-code and category-code</strong>. The constraint on the next 12 months is not category demand or founder credibility. It is <strong>narrative and funnel compression</strong>: today&rsquo;s site asks visitors to parse 13+ programs, 5+ membership tiers, and 2 sister communities on a dated Elementor template before understanding the single-sentence value proposition. Simplifying the hero to one clear promise (&ldquo;The private community for PE-backed executives&rdquo;), collapsing tiers to three, and surfacing Kit Lisle&rsquo;s voice as the anchor are the three highest-leverage moves available.</p>
+</div>
+<div class="bento bento-4" style="margin-bottom:32px;">
+<div class="stat-card"><span class="src-block v">Sourced</span><div class="stat-label">Founder</div><div class="stat-value">Kit Lisle</div><div class="stat-context">Also founder of Strategic Growth Council</div></div>
+<div class="stat-card"><span class="src-block v">Sourced</span><div class="stat-label">Members Served</div><div class="stat-value">PE-Backed Execs</div><div class="stat-context">CEO / CFO / COO / CRO / CMO / CHRO / CTO</div></div>
+<div class="stat-card"><span class="src-block v">Sourced</span><div class="stat-label">Core Stat</div><div class="stat-value">3 years</div><div class="stat-context">Average tenure of a PE-backed executive</div></div>
+<div class="stat-card"><span class="src-block v">Sourced</span><div class="stat-label">Programs</div><div class="stat-value">13+</div><div class="stat-context">Councils / events / bootcamps / consulting / introductions</div></div>
+</div>
+<div class="bento bento-2">
+<div class="list-card"><div class="list-header"><i data-lucide="check-circle"></i><div class="list-title">Strategic Strengths</div></div><div class="list-item"><span class="list-num">01</span><div class="list-content"><h4>Only PE-native community</h4><p>Not a generalist CEO peer group (YPO, Vistage, EO). Explicitly built for PE-backed executives and Operating Partners &mdash; a structural niche no horizontal player can replicate without losing their general-audience positioning.</p></div></div><div class="list-item"><span class="list-num">02</span><div class="list-content"><h4>Kit Lisle founder credibility</h4><p>Kit&rsquo;s Strategic Growth Council heritage provides 20+ years of CEO peer-group operating depth. Rare founder-market fit in the PE community category.</p></div></div><div class="list-item"><span class="list-num">03</span><div class="list-content"><h4>Clever .pe domain</h4><p>theoperators.pe reads as both Peru TLD and &ldquo;Private Equity&rdquo; &mdash; distinctive, memorable, and a brand asset competitors cannot replicate.</p></div></div><div class="list-item"><span class="list-num">04</span><div class="list-content"><h4>Transparent published pricing</h4><p>$0 Observer / $89 Executive / $149 Career Transition tiers are rare in this category &mdash; most peer groups hide pricing. Reduces procurement friction and raises top-of-funnel trust.</p></div></div><div class="list-item"><span class="list-num">05</span><div class="list-content"><h4>Multi-modality program mix</h4><p>Community + Councils + Events + Bootcamps + Consulting + Coaching + Introductions covers most of a PE exec&rsquo;s learning-and-connection lifecycle.</p></div></div><div class="list-item"><span class="list-num">06</span><div class="list-content"><h4>Peer-group testimonial density</h4><p>Customer quotes read as unprompted and specific (&ldquo;People showed up to meet with me and they were great fits&rdquo;). High social-proof quality despite low visibility placement.</p></div></div></div>
+<div class="list-card warn"><div class="list-header warn"><i data-lucide="alert-triangle"></i><div class="list-title">Critical Gaps</div></div><div class="list-item"><span class="list-num">01</span><div class="list-content"><h4>13+ programs on one navigation</h4><p>Visitors face: Value Creation Operating System / Bootcamps / Consulting / Coaching / Introductions / PEbacked.solutions / PE Hiring Decisionmakers / Trusted Advisors / Operating Partners Roundtable / Career Resource Council / Strategic Growth Council. Choice paralysis before conversion.</p></div></div><div class="list-item"><span class="list-num">02</span><div class="list-content"><h4>5+ membership tiers</h4><p>Observer / Executive / Career Transition / Management / PE-Backed Operator &mdash; tier names, scope, and pricing differences are not immediately scannable. Need to collapse to 3.</p></div></div><div class="list-item"><span class="list-num">03</span><div class="list-content"><h4>Dated Elementor template</h4><p>WordPress + Elementor 4.3.6 build dates the brand. Mid-market PE execs screen on brand quality before capability &mdash; the site undercuts the premium positioning.</p></div></div><div class="list-item"><span class="list-num">04</span><div class="list-content"><h4>Kit Lisle&rsquo;s voice under-amplified</h4><p>Founder credibility is the single strongest asset but Kit&rsquo;s LinkedIn / podcast / op-ed cadence under-indexes his 20+ year standing in the category.</p></div></div><div class="list-item"><span class="list-num">05</span><div class="list-content"><h4>Sister community confusion</h4><p>&ldquo;PEbacked.solutions&rdquo; as a separate but related brand creates narrative complexity before conversion. Consolidate or clarify the relationship.</p></div></div></div>
+</div>
+</section>
+
+<section id="product" class="section">
+  <div class="section-header">
+    <div class="section-badge">Analysis</div>
+    <h1 class="section-title">Product Analysis</h1>
+    <p class="section-desc">The Operators is three overlapping products bundled under one brand: a membership community (clubhouse + events), a set of structured peer councils, and a suite of paid services (bootcamps, consulting, coaching, introductions). Each addresses a different stage of a PE executive&rsquo;s career lifecycle.</p>
+  </div>
+  <div class="subsection">
+<div class="subsection-title">The Membership Platform <span class="src v">Sourced</span></div>
+<div class="bento bento-3">
+<div class="feature-card"><div class="feature-icon"><i data-lucide="eye"></i></div><div class="feature-title">Observer (Free)</div><div class="feature-desc">View events + content. $99 per event a la carte. The low-commitment entry point. Converts to paid tier after 1-2 events.</div><div class="feature-tags"><span class="tag brand">Free</span></div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="user-check"></i></div><div class="feature-title">Executive ($89/mo)</div><div class="feature-desc">Clubhouse access + free weekly events. The &ldquo;observe + learn&rdquo; tier for passive members.</div><div class="feature-tags"><span class="tag accent">$89/mo</span></div></div>
+<div class="feature-card"><div class="feature-icon"><i data-lucide="briefcase"></i></div><div class="feature-title">Career Transition ($149/mo)</div><div class="feature-desc">Full access + visibility to PE groups hiring + job search assistance. The highest-conversion tier for executives between roles.</div><div class="feature-tags"><span class="tag brand">$149/mo</span><span class="tag brand">Popular</span></div></div>
+</div>
+</div>
+<div class="subsection">
+<div class="subsection-title">The Peer Councils <span class="src v">Sourced</span></div>
+<div class="bento bento-2">
+<div class="feature-card"><div class="feature-icon"><i data-lucide="users-2"></i></div><div class="feature-title">Value Creation Council</div><div class="feature-desc">Peer group focused on executing value-creation plans during the hold period. Operating Partner and CEO roles.</div><div class="feature-tags"><span class="tag brand">Peer group</span></div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="trending-up"></i></div><div class="feature-title">Strategic Growth Council</div><div class="feature-desc">Peer group focused on scaling growth &mdash; the legacy SGC program that predates The Operators.</div><div class="feature-tags"><span class="tag accent">Legacy brand</span></div></div>
+<div class="feature-card"><div class="feature-icon"><i data-lucide="shield"></i></div><div class="feature-title">Operating Partners Roundtable</div><div class="feature-desc">Dedicated forum for Operating Partners at PE firms &mdash; a role-specific council differentiating from generalist CEO communities.</div><div class="feature-tags"><span class="tag brand">Role-specific</span></div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="refresh-ccw"></i></div><div class="feature-title">Career Resource Council</div><div class="feature-desc">Transition-focused council for executives between PE engagements.</div><div class="feature-tags"><span class="tag accent">Transition</span></div></div>
+</div>
+</div>
+<div class="subsection">
+<div class="subsection-title">Services &amp; Programs <span class="src v">Sourced</span></div>
+<div class="bento bento-3">
+<div class="feature-card"><div class="feature-icon"><i data-lucide="zap"></i></div><div class="feature-title">Value Creation Operating System</div><div class="feature-desc">Proprietary framework for executing PE value-creation plans. Positioned as a differentiated methodology.</div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="calendar"></i></div><div class="feature-title">Bootcamps</div><div class="feature-desc">Intensive learning programs for specific PE skills / situations.</div></div>
+<div class="feature-card"><div class="feature-icon"><i data-lucide="compass"></i></div><div class="feature-title">Consulting</div><div class="feature-desc">Direct advisory engagements leveraging the community&rsquo;s collective expertise.</div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="headphones"></i></div><div class="feature-title">Coaching / Thought Partnering</div><div class="feature-desc">1:1 engagements with senior members as coaches / thought partners.</div></div>
+<div class="feature-card"><div class="feature-icon"><i data-lucide="handshake"></i></div><div class="feature-title">Introductions</div><div class="feature-desc">Curated member-to-member matchmaking &mdash; a stated core promise of the brand.</div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="search"></i></div><div class="feature-title">PE Hiring Decisionmakers</div><div class="feature-desc">Directory connecting hiring PE firms with available executives.</div></div>
+</div>
+</div>
+<div class="subsection">
+<div class="subsection-title">Content &amp; Owned Media <span class="src v">Sourced</span></div>
+<div class="bento bento-3">
+<div class="feature-card"><div class="feature-icon"><i data-lucide="headphones"></i></div><div class="feature-title">Podcast</div><div class="feature-desc">Published podcast featuring PE operator interviews &mdash; owned-media distribution channel.</div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="book-open"></i></div><div class="feature-title">Content Library</div><div class="feature-desc">Members-only best-practice content for PE operators.</div></div>
+<div class="feature-card"><div class="feature-icon"><i data-lucide="mail"></i></div><div class="feature-title">Newsletter</div><div class="feature-desc">ConvertKit (Kit.com) newsletter for ecosystem updates.</div></div>
+</div>
+</div>
+<div class="next-step"><i data-lucide="circle-arrow-right"></i><div class="next-step-text"><strong>So what &rarr;</strong> The product set is the deepest and most differentiated in the PE-executive community category, but no visitor can map all 13+ programs on a single visit. <strong>Next step:</strong> within 60 days, rebuild the homepage around a 3-choice entry (&ldquo;I&rsquo;m a PE-Backed Executive&rdquo; / &ldquo;I&rsquo;m an Operating Partner&rdquo; / &ldquo;I&rsquo;m in Career Transition&rdquo;) &mdash; each route surfaces the 2-3 programs relevant to that persona and hides the rest.</div></div>
+</section>
+
+<section id="icp" class="section">
+  <div class="section-header">
+    <div class="section-badge">Analysis</div>
+    <h1 class="section-title">Ideal Customer Profile <span class="src v" style="vertical-align:middle;font-size:11px;">Sourced from registration form</span></h1>
+    <p class="section-desc">The Operators&rsquo; registration form reveals the explicit ICP: PE-backed CEOs and C-suite executives, Operating Partners, and executives in career transition. Two distinct buyer personas drive most LTV.</p>
+  </div>
+  <div class="persona-grid">
+<div class="persona">
+<div class="persona-header">
+<div class="persona-name">The PE-Backed Executive</div>
+<div class="persona-role">CEO / CFO / COO / CRO / CMO &middot; Currently in a portfolio-company role</div>
+</div>
+<div class="persona-body">
+<div class="persona-section"><div class="persona-section-title">Profile</div><ul class="persona-list">
+<li>Currently serving as CEO or C-suite exec at a PE-backed portfolio company</li>
+<li>Industry: Business Services, Consumer, Distribution, Energy, Healthcare, Industrials, Infrastructure, Tech</li>
+<li>Company EBITDA range: $2M to $25M+</li>
+<li>Carries personal accountability for hitting the PE value-creation plan</li>
+<li>Faces 3-year average tenure &mdash; acute awareness of career fragility</li>
+</ul></div>
+<div class="persona-section"><div class="persona-section-title">Buying Triggers</div><ul class="persona-list">
+<li>Facing a specific value-creation plan challenge (pricing, M&amp;A, team scale)</li>
+<li>Board / PE sponsor pressure to deliver quarter-over-quarter</li>
+<li>Isolation &mdash; no peer at the company to discuss sensitive PE dynamics</li>
+<li>Preparing for liquidity event or next role transition</li>
+</ul></div>
+<div class="persona-section"><div class="persona-section-title">Objections</div><ul class="persona-list">
+<li>&ldquo;How is this different from YPO / Vistage / EO?&rdquo;</li>
+<li>&ldquo;Is this just another networking group?&rdquo;</li>
+<li>&ldquo;What&rsquo;s the time commitment for the councils?&rdquo;</li>
+<li>&ldquo;Can I expense this through my portfolio company?&rdquo;</li>
+</ul></div>
+</div>
+</div>
+<div class="persona alt">
+<div class="persona-header alt">
+<div class="persona-name">The Executive in Transition</div>
+<div class="persona-role">Post-exit / between-roles PE-backed exec</div>
+</div>
+<div class="persona-body">
+<div class="persona-section"><div class="persona-section-title">Profile</div><ul class="persona-list">
+<li>Recently completed a PE engagement (exit, acquisition, departure)</li>
+<li>Looking for the next portfolio-company CEO or C-suite role</li>
+<li>Has deep PE track record but no formal channel to signal availability</li>
+<li>Age range 45-65 &mdash; experienced, not junior</li>
+</ul></div>
+<div class="persona-section"><div class="persona-section-title">Buying Triggers</div><ul class="persona-list">
+<li>Just completed liquidity event &mdash; 90-day window for next role</li>
+<li>Departed a role unexpectedly &mdash; needs structured search</li>
+<li>Peer or former sponsor recommends The Operators</li>
+<li>Searching LinkedIn for &ldquo;PE-backed executive community&rdquo;</li>
+</ul></div>
+<div class="persona-section"><div class="persona-section-title">Objections</div><ul class="persona-list">
+<li>&ldquo;Will PE firms actually find me through this?&rdquo;</li>
+<li>&ldquo;What&rsquo;s the active-search success rate?&rdquo;</li>
+<li>&ldquo;$149/mo &mdash; what&rsquo;s the ROI vs. executive search firms?&rdquo;</li>
+<li>&ldquo;How do I know PE hiring decisionmakers actually use this platform?&rdquo;</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="next-step"><i data-lucide="circle-arrow-right"></i><div class="next-step-text"><strong>So what &rarr;</strong> The two personas have radically different urgency and procurement paths &mdash; the active executive buys on peer value, the transition executive buys on job-search ROI. <strong>Next step:</strong> split the homepage conversion flow so each persona sees persona-specific case studies, tier recommendation, and CTA (&ldquo;Join a Council&rdquo; vs. &ldquo;Get Found by PE&rdquo;).</div></div>
+</section>
+
+<section id="ipp" class="section">
+  <div class="section-header">
+    <div class="section-badge">Analysis</div>
+    <h1 class="section-title">Ideal Partner Profile <span class="src i" style="vertical-align:middle;font-size:11px;">Inferred</span></h1>
+    <p class="section-desc">The Operators&rsquo; growth depends on partnerships with the organizations and advisors that PE-backed executives already trust. Four partner archetypes deserve a programmatic motion.</p>
+  </div>
+  <div class="bento bento-2">
+<div class="feature-card"><div class="feature-icon"><i data-lucide="briefcase"></i></div><div class="feature-title">PE Firms (Portfolio Development Teams)</div><div class="feature-desc">Firms like Vista, Thoma Bravo, Advent, Bain Capital. Their portfolio operations / value creation teams want their CEOs connected to peer resources. Enterprise-tier &ldquo;Portfolio Pass&rdquo; subscription sold to the firm covers all portfolio executives.</div><div class="feature-tags"><span class="tag brand">Tier 1</span><span class="tag brand">Enterprise</span></div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="users"></i></div><div class="feature-title">Executive Search Firms</div><div class="feature-desc">Heidrick, Spencer Stuart, Russell Reynolds, Korn Ferry PE practices. They already place PE-backed execs &mdash; the career-transition tier of The Operators is a natural sourcing channel for them.</div><div class="feature-tags"><span class="tag accent">Tier 1</span><span class="tag accent">Talent flow</span></div></div>
+<div class="feature-card"><div class="feature-icon"><i data-lucide="graduation-cap"></i></div><div class="feature-title">PE Industry Education</div><div class="feature-desc">ACG, Private Equity International, Buyouts Insider, Kellogg/Wharton PE Executive Programs. Co-marketed webinars + joint content position The Operators as the community layer on top of their content/event offerings.</div><div class="feature-tags"><span class="tag brand">Tier 2</span><span class="tag brand">Authority</span></div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="tool"></i></div><div class="feature-title">Portfolio Service Vendors</div><div class="feature-desc">Firms serving PE portfolios (finance transformation, pricing, digital). They want introductions to new portfolio CEOs. Sponsor / vendor-partnership tier generates revenue + provides members with vetted trusted advisors.</div><div class="feature-tags"><span class="tag accent">Tier 2</span><span class="tag accent">Revenue</span></div></div>
+</div>
+<div class="next-step"><i data-lucide="circle-arrow-right"></i><div class="next-step-text"><strong>So what &rarr;</strong> PE firms are the single highest-leverage partner channel &mdash; a Portfolio Pass enterprise tier could 10x the paying-member base through a dozen firm-level deals rather than thousands of individual sales. <strong>Next step:</strong> design and pitch a &ldquo;PE Firm Portfolio Pass&rdquo; subscription in Q1 2027, targeting 5 mid-market PE firms as design partners.</div></div>
+</section>
+
+<section id="business" class="section">
+  <div class="section-header">
+    <div class="section-badge">Analysis</div>
+    <h1 class="section-title">Business Model</h1>
+    <p class="section-desc">A multi-tier subscription membership with layered paid services (bootcamps, consulting, coaching, events). Pricing is published and transparent &mdash; rare in the executive peer-group category where opacity is the norm. Multiple revenue streams compound.</p>
+  </div>
+  <div class="bento bento-3" style="margin-bottom:28px;">
+<div class="stat-card"><span class="src-block v">Sourced</span><div class="stat-label">Lowest Paid Tier</div><div class="stat-value">$89/mo</div><div class="stat-context">Executive &mdash; clubhouse + events</div></div>
+<div class="stat-card"><span class="src-block v">Sourced</span><div class="stat-label">Transition Tier</div><div class="stat-value">$149/mo</div><div class="stat-context">Full access + PE hiring visibility</div></div>
+<div class="stat-card"><span class="src-block v">Sourced</span><div class="stat-label">A La Carte</div><div class="stat-value">$99/event</div><div class="stat-context">For Observer-tier members</div></div>
+</div>
+<div class="subsection">
+<div class="subsection-title">Revenue Streams <span class="src i">Inferred</span></div>
+<div class="bento bento-2">
+<div class="feature-card"><div class="feature-icon"><i data-lucide="credit-card"></i></div><div class="feature-title">Recurring Memberships</div><div class="feature-desc">$89-$149/mo subscriptions. Predictable ARR layer. Potential higher tiers (Management, PE-Backed Operator) implied in flow.</div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="calendar-clock"></i></div><div class="feature-title">Event Revenue</div><div class="feature-desc">$99/event a la carte for non-members. Revenue from Observers who convert to attendees but not members.</div></div>
+<div class="feature-card"><div class="feature-icon"><i data-lucide="graduation-cap"></i></div><div class="feature-title">Bootcamp / Program Fees</div><div class="feature-desc">Paid intensive programs &mdash; typically 10-20x the monthly membership price per engagement.</div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="briefcase"></i></div><div class="feature-title">Consulting / Coaching</div><div class="feature-desc">Higher-margin, lower-volume revenue layer. Monetizes member expertise at the top of the pyramid.</div></div>
+<div class="feature-card"><div class="feature-icon"><i data-lucide="handshake"></i></div><div class="feature-title">Vendor / Sponsor Revenue</div><div class="feature-desc">Trusted Advisors directory + sponsorships from service providers wanting to reach PE-backed executives.</div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="building"></i></div><div class="feature-title">Enterprise / PE Firm Revenue</div><div class="feature-desc">Portfolio Pass tier (not yet published) &mdash; largest potential revenue line if productized.</div></div>
+</div>
+</div>
+<div class="subsection">
+<div class="subsection-title">Pricing &amp; Model Levers <span class="src i">Inferred</span></div>
+<div class="table-card"><table>
+<thead><tr><th>Lever</th><th>Why It Matters</th><th>Risk</th></tr></thead>
+<tbody>
+<tr><td class="td-bold">Collapse tiers to 3</td><td class="td-muted">Removes choice paralysis; raises conversion rate</td><td class="td-muted">Lose edge-case tier buyers</td></tr>
+<tr><td class="td-bold">Enterprise Portfolio Pass</td><td class="td-muted">10x revenue through firm-level deals</td><td class="td-muted">Longer PE firm sales cycles (6-12 months)</td></tr>
+<tr><td class="td-bold">Annual prepay discount</td><td class="td-muted">Locks revenue + reduces churn</td><td class="td-muted">Mid-market resistance to annual commits</td></tr>
+<tr><td class="td-bold">Outcome-linked Career Transition</td><td class="td-muted">Success-fee on placements (via PE Hiring Decisionmakers)</td><td class="td-muted">Attribution + collection complexity</td></tr>
+</tbody>
+</table></div>
+</div>
+<div class="next-step"><i data-lucide="circle-arrow-right"></i><div class="next-step-text"><strong>So what &rarr;</strong> The single biggest revenue lever is the unbuilt Portfolio Pass tier &mdash; one PE firm closing could equal 100 individual member subscriptions. <strong>Next step:</strong> publish an Enterprise page with &ldquo;Portfolio Pass&rdquo; positioning + outreach to 10 target PE firms in Q1 2027.</div></div>
+</section>
+
+<section id="opportunities" class="section">
+  <div class="section-header">
+    <div class="section-badge">Strategy</div>
+    <h1 class="section-title">Strategic Growth Opportunities <span class="src i" style="vertical-align:middle;font-size:11px;">Recommendations</span></h1>
+    <p class="section-desc">Five prioritized initiatives, ranked by 12-month impact relative to effort. All five build directly on assets The Operators already owns &mdash; Kit Lisle&rsquo;s credibility, the 13+ programs, the member community, the clever .pe domain.</p>
+  </div>
+  
+<div class="opp-card">
+<div class="opp-rank p1">1</div>
+<div class="opp-content"><h4>3-Persona Homepage Rebuild</h4><p>Replace the current program-listing homepage with 3 persona entry routes: &ldquo;I&rsquo;m a PE-Backed Executive&rdquo; / &ldquo;I&rsquo;m an Operating Partner&rdquo; / &ldquo;I&rsquo;m in Career Transition&rdquo;. Each surfaces the 2-3 relevant programs and hides the rest. Collapses 13 programs + 5 tiers into a single clear path. Highest-leverage single improvement.</p></div>
+<div class="opp-meta">
+<div class="opp-meta-item"><div class="opp-meta-label">Impact</div><div class="opp-meta-value">Very High</div></div>
+<div class="opp-meta-item"><div class="opp-meta-label">Effort</div><div class="opp-meta-value">Medium</div></div>
+<div class="opp-meta-item"><div class="opp-meta-label">Timeline</div><div class="opp-meta-value">45 days</div></div>
+</div></div>
+<div class="opp-card">
+<div class="opp-rank p2">2</div>
+<div class="opp-content"><h4>PE Firm Portfolio Pass</h4><p>Productize an enterprise tier sold to PE firms covering all their portfolio CEOs and Operating Partners. Starts at 5-firm design-partner cohort. One $50K firm deal replaces ~50 individual memberships &mdash; and brings strategic relationship with the PE firm itself.</p></div>
+<div class="opp-meta">
+<div class="opp-meta-item"><div class="opp-meta-label">Impact</div><div class="opp-meta-value">Very High</div></div>
+<div class="opp-meta-item"><div class="opp-meta-label">Effort</div><div class="opp-meta-value">High</div></div>
+<div class="opp-meta-item"><div class="opp-meta-label">Timeline</div><div class="opp-meta-value">90-180 days</div></div>
+</div></div>
+<div class="opp-card">
+<div class="opp-rank p3">3</div>
+<div class="opp-content"><h4>Kit Lisle Public Voice Engine</h4><p>20+ years of category credibility deserves a daily LinkedIn cadence and monthly podcast circuit (ACG&rsquo;s Middle Market Growth Conversations, Private Equity International&rsquo;s podcasts). Each piece of content ends with a specific Operators program CTA. Compounds brand + inbound simultaneously.</p></div>
+<div class="opp-meta">
+<div class="opp-meta-item"><div class="opp-meta-label">Impact</div><div class="opp-meta-value">High</div></div>
+<div class="opp-meta-item"><div class="opp-meta-label">Effort</div><div class="opp-meta-value">Low</div></div>
+<div class="opp-meta-item"><div class="opp-meta-label">Timeline</div><div class="opp-meta-value">Ongoing</div></div>
+</div></div>
+<div class="opp-card">
+<div class="opp-rank p4">4</div>
+<div class="opp-content"><h4>Platform Modernization</h4><p>Move off WordPress + Elementor onto a modern stack (Webflow, Framer, or custom). Mid-market PE execs judge brand quality before capability &mdash; the current site undercuts the premium positioning. Does not require changing the community backend, just the marketing frontend.</p></div>
+<div class="opp-meta">
+<div class="opp-meta-item"><div class="opp-meta-label">Impact</div><div class="opp-meta-value">High</div></div>
+<div class="opp-meta-item"><div class="opp-meta-label">Effort</div><div class="opp-meta-value">High</div></div>
+<div class="opp-meta-item"><div class="opp-meta-label">Timeline</div><div class="opp-meta-value">90 days</div></div>
+</div></div>
+<div class="opp-card">
+<div class="opp-rank p5">5</div>
+<div class="opp-content"><h4>The Operators Quarterly Research</h4><p>Leverage the member community (n=500+ PE executives) for proprietary &ldquo;State of the PE Operator&rdquo; research reports. Compensation surveys, average tenure data, value-creation benchmarks. Generates earned media + inbound + lead magnets simultaneously.</p></div>
+<div class="opp-meta">
+<div class="opp-meta-item"><div class="opp-meta-label">Impact</div><div class="opp-meta-value">Medium</div></div>
+<div class="opp-meta-item"><div class="opp-meta-label">Effort</div><div class="opp-meta-value">Medium</div></div>
+<div class="opp-meta-item"><div class="opp-meta-label">Timeline</div><div class="opp-meta-value">Quarterly</div></div>
+</div></div>
+<div class="subsection" style="margin-top:48px;">
+<div class="subsection-title">30 / 60 / 90 Day Quick Start</div>
+<div class="bento bento-3">
+<div class="feature-card"><div class="feature-icon"><i data-lucide="flag"></i></div><div class="feature-title">Days 0-30 &middot; Foundation</div><div class="feature-desc">Lock 3-persona homepage scope. Identify 5 PE firm design-partner targets for Portfolio Pass. Set Kit Lisle 12-month content calendar. Brief platform-modernization scope.</div><div class="feature-tags"><span class="tag brand">Scope</span><span class="tag brand">Partner targets</span><span class="tag brand">Content calendar</span></div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="rocket"></i></div><div class="feature-title">Days 31-60 &middot; Acceleration</div><div class="feature-desc">3-persona homepage live. Portfolio Pass concept pitched to 3 PE firms. Kit publishes first 4 LinkedIn posts. First quarterly research report scoped.</div><div class="feature-tags"><span class="tag brand">HP live</span><span class="tag brand">PE outreach</span><span class="tag brand">Kit live</span></div></div>
+<div class="feature-card"><div class="feature-icon"><i data-lucide="trophy"></i></div><div class="feature-title">Days 61-90 &middot; Compounding</div><div class="feature-desc">First PE firm Portfolio Pass design-partner signed. Platform-modernization kickoff. Quarterly research published. Measurable persona-route conversion lift over baseline.</div><div class="feature-tags"><span class="tag brand">First PE deal</span><span class="tag brand">Modernization</span><span class="tag brand">Research live</span></div></div>
+</div>
+</div>
+</section>
+
+<section id="paid-media" class="section">
+  <div class="section-header">
+    <div class="section-badge">Playbook</div>
+    <h1 class="section-title">Paid Media Strategy</h1>
+    <p class="section-desc">A high-trust, low-frequency subscription with a long consideration cycle. Broad-reach paid media wastes dollars; spend should concentrate on named-account ABM at PE firms, high-intent LinkedIn, and founder-authority amplification.</p>
+  </div>
+  <div class="subsection">
+<div class="subsection-title">Channel Mix Recommendation</div>
+<div class="table-card"><table>
+<thead><tr><th>Channel</th><th>Role</th><th>Budget Share</th><th>Primary KPI</th></tr></thead>
+<tbody>
+<tr><td class="td-bold">LinkedIn (named accounts)</td><td class="td-muted">PE firms + top 500 PE-backed companies</td><td>40%</td><td class="td-muted">Account engagement + demo rate</td></tr>
+<tr><td class="td-bold">Google Search</td><td class="td-muted">"PE-backed executive community", "operating partner network", "fractional CRO PE"</td><td>20%</td><td class="td-muted">Cost per signup</td></tr>
+<tr><td class="td-bold">LinkedIn boosted content</td><td class="td-muted">Kit Lisle thought leadership amplification</td><td>15%</td><td class="td-muted">Post engagement + profile visits</td></tr>
+<tr><td class="td-bold">PE industry sponsorships</td><td class="td-muted">ACG events, PE Hub, Buyouts Insider newsletter</td><td>15%</td><td class="td-muted">Signup attribution</td></tr>
+<tr><td class="td-bold">PE podcast sponsorships</td><td class="td-muted">Middle Market Growth, PEI Pulse, Private Equity Funcast</td><td>10%</td><td class="td-muted">UTM-attributed signups</td></tr>
+</tbody>
+</table></div>
+</div>
+<div class="subsection">
+<div class="subsection-title">Campaign Architecture</div>
+<div class="bento bento-2">
+<div class="feature-card"><div class="feature-icon"><i data-lucide="target"></i></div><div class="feature-title">PE Firm Named-Account ABM</div><div class="feature-desc">Top 100 mid-market PE firms. Three-touch sequence: Kit thought leadership &rarr; State of PE Operator report &rarr; Portfolio Pass inquiry CTA. Targets portfolio ops / value creation leaders specifically.</div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="shield"></i></div><div class="feature-title">Brand &amp; Defense</div><div class="feature-desc">&ldquo;The Operators&rdquo; exact-match. Negatives: &ldquo;operator app&rdquo;, &ldquo;phone operator&rdquo;, &ldquo;operator mathematics&rdquo;. Defend the brand name on direct search.</div></div>
+</div>
+</div>
+<div class="next-step"><i data-lucide="circle-arrow-right"></i><div class="next-step-text"><strong>So what &rarr;</strong> LinkedIn named-account ABM to PE firms is the highest-leverage paid channel because each firm-level conversation can generate a Portfolio Pass deal plus 20-50 individual memberships. <strong>Next step:</strong> commit 40% of 2027 paid spend to a named-account LinkedIn program targeting the top 100 mid-market PE firms specifically.</div></div>
+</section>
+
+<section id="organic-growth" class="section">
+  <div class="section-header">
+    <div class="section-badge">Playbook</div>
+    <h1 class="section-title">Organic Growth Strategy</h1>
+    <p class="section-desc">SEO + founder authority + member-generated content compound over time. The Operators has the founder credibility and the community data; the lever is consistency and distribution.</p>
+  </div>
+  <div class="bento bento-2">
+<div class="feature-card"><div class="feature-icon"><i data-lucide="search"></i></div><div class="feature-title">PE Topic SEO Hubs</div><div class="feature-desc">Three hubs: &ldquo;PE-backed executive career&rdquo;, &ldquo;value creation playbook&rdquo;, &ldquo;operating partner role&rdquo;. Each hub: 12-15 supporting articles + downloadable template + member spotlight. Owns the vocabulary on search.</div><div class="feature-tags"><span class="tag brand">SEO</span><span class="tag brand">Hub</span></div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="headphones"></i></div><div class="feature-title">Podcast Guest Circuit</div><div class="feature-desc">Kit Lisle guests on Middle Market Growth Conversations, Private Equity Funcast, Capital Raiser, Private Equity Podcast. 2 spots/month, repurposed to LinkedIn.</div><div class="feature-tags"><span class="tag accent">Authority</span><span class="tag accent">Distribution</span></div></div>
+<div class="feature-card"><div class="feature-icon"><i data-lucide="share-2"></i></div><div class="feature-title">Kit Lisle LinkedIn Cadence</div><div class="feature-desc">3 posts/week from Kit: 1 PE operator insight, 1 Operators member story, 1 industry observation. Reposts from The Operators page. Goal: 25K targeted PE-ecosystem followers.</div><div class="feature-tags"><span class="tag brand">Daily</span><span class="tag brand">Trust</span></div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="file-text"></i></div><div class="feature-title">Annual State of PE Operator Report</div><div class="feature-desc">Quarterly or annual flagship research using member data: tenure, compensation, value-creation benchmarks, hiring patterns. Gated for email; distributed to PE press (PEI, Buyouts, PE Hub, Axios Pro Rata).</div><div class="feature-tags"><span class="tag accent">Backlinks</span><span class="tag accent">PR</span></div></div>
+</div>
+<div class="next-step"><i data-lucide="circle-arrow-right"></i><div class="next-step-text"><strong>So what &rarr;</strong> The &ldquo;State of the PE Operator&rdquo; report is the single highest-leverage content asset because no one else has the n=500 PE-backed executive panel that would make it credible. <strong>Next step:</strong> commission the first report by end of Q1 2027 &mdash; becomes the PR / sales / recruiting anchor for the whole year.</div></div>
+</section>
+
+<section id="retention" class="section">
+  <div class="section-header">
+    <div class="section-badge">Playbook</div>
+    <h1 class="section-title">Retention &amp; Partnerships</h1>
+    <p class="section-desc">In recurring membership, gross retention is the entire game &mdash; a 1pt gross-retention improvement compounds across cohorts. The Operators&rsquo; retention motion depends on member-to-member relationship density, not platform features.</p>
+  </div>
+  <div class="bento bento-3">
+<div class="feature-card"><div class="feature-icon"><i data-lucide="check-circle"></i></div><div class="feature-title">First 60-Day Activation</div><div class="feature-desc">Structured onboarding: week 1 personal welcome from Kit, week 2 first event attendance, week 4 first council meeting, day 60 first 1:1 introduction made. Members who attend 2 events in first 30 days renew at 3x rate.</div></div>
+<div class="feature-card"><div class="feature-icon accent"><i data-lucide="users-2"></i></div><div class="feature-title">Member-to-Member Intro Engine</div><div class="feature-desc">The &ldquo;Introductions That Matter&rdquo; promise must be systematized: structured matchmaking program with named outcomes (e.g. &ldquo;Introduced 8 members this quarter; 3 became business partners&rdquo;). Core retention lever.</div></div>
+<div class="feature-card"><div class="feature-icon"><i data-lucide="award"></i></div><div class="feature-title">Member Status Tiers</div><div class="feature-desc">Add non-paid status progression (Observer &rarr; Member &rarr; Contributor &rarr; Council Chair &rarr; Fellow). Status + peer recognition drives unpaid retention mechanisms above the paid tier.</div></div>
+</div>
+<div class="subsection" style="margin-top:36px;">
+<div class="subsection-title">Strategic Partnerships</div>
+<div class="table-card"><table>
+<thead><tr><th>Partner Type</th><th>Example</th><th>Mechanism</th><th>Year-1 Goal</th></tr></thead>
+<tbody>
+<tr><td class="td-bold">PE Firms</td><td class="td-muted">Vista, Thoma Bravo, Advent, Bain Capital, Francisco Partners</td><td class="td-muted">Portfolio Pass enterprise tier</td><td>5 firms signed</td></tr>
+<tr><td class="td-bold">Executive Search</td><td class="td-muted">Heidrick, Spencer Stuart, Russell Reynolds PE practices</td><td class="td-muted">Career Transition member pipeline</td><td>3 firms active</td></tr>
+<tr><td class="td-bold">PE Industry Associations</td><td class="td-muted">ACG, PEI Media, SEIA</td><td class="td-muted">Sponsorship + co-content</td><td>Sustained</td></tr>
+<tr><td class="td-bold">Portfolio Service Providers</td><td class="td-muted">Finance, pricing, digital transformation firms</td><td class="td-muted">Trusted Advisor directory</td><td>20 listed</td></tr>
+</tbody>
+</table></div>
+</div>
+</section>
+
+<section id="budget" class="section">
+  <div class="section-header">
+    <div class="section-badge">Playbook</div>
+    <h1 class="section-title">Budget &amp; Allocation <span class="src i" style="vertical-align:middle;font-size:11px;">Inferred</span></h1>
+    <p class="section-desc">Recommendations against a hypothetical annual growth-marketing budget. Actuals to be calibrated against current spend, member LTV, and CAC norms in kickoff.</p>
+  </div>
+  <div class="subsection">
+<div class="subsection-title">Pool-Level Allocation</div>
+<div class="table-card"><table>
+<thead><tr><th>Pool</th><th>Share</th><th>Primary KPI</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="td-bold">PE Firm Enterprise Sales</td><td>30%</td><td class="td-muted">Portfolio Pass deals closed</td><td class="td-muted">Named-account ABM + outbound to top 100 PE firms</td></tr>
+<tr><td class="td-bold">Founder Authority Content</td><td>20%</td><td class="td-muted">Branded search lift + Kit LinkedIn reach</td><td class="td-muted">Kit LinkedIn + podcast + op-eds + research reports</td></tr>
+<tr><td class="td-bold">Demand Gen (Direct Members)</td><td>20%</td><td class="td-muted">Cost per paid signup</td><td class="td-muted">LinkedIn ABM + Google Search + podcast sponsorships</td></tr>
+<tr><td class="td-bold">Platform Modernization</td><td>15%</td><td class="td-muted">Conversion rate lift from current baseline</td><td class="td-muted">Site rebuild off WordPress + persona-routed homepage</td></tr>
+<tr><td class="td-bold">Events &amp; Experiential</td><td>10%</td><td class="td-muted">Attendance + member conversion</td><td class="td-muted">In-person member events in top PE hubs (NYC, Chicago, SF, DMV)</td></tr>
+<tr><td class="td-bold">Experiments</td><td>5%</td><td class="td-muted">Per-test learning velocity</td><td class="td-muted">New verticals, new partnership models</td></tr>
+</tbody>
+</table></div>
+</div>
+<div class="next-step"><i data-lucide="circle-arrow-right"></i><div class="next-step-text"><strong>So what &rarr;</strong> PE firm enterprise sales is the single highest-leverage budget line because one $50K firm deal replaces 50 individual memberships. <strong>Next step:</strong> in kickoff, validate whether The Operators is currently funding enterprise outbound at all &mdash; if not, this is the single biggest 2027 budget shift.</div></div>
+</section>
+
+<section id="swot" class="section">
+  <div class="section-header">
+    <div class="section-badge">Synthesis</div>
+    <h1 class="section-title">SWOT Analysis</h1>
+    <p class="section-desc">A condensed view of the strategic position and the forces acting on it.</p>
+  </div>
+  <div class="swot-grid">
+<div class="swot s"><div class="swot-header"><i data-lucide="shield-check"></i> Strengths</div><div class="swot-body"><ul class="swot-list"><li>Only PE-native executive community &mdash; structural niche</li><li>Kit Lisle founder credibility (20+ years Strategic Growth Council)</li><li>Clever .pe domain &mdash; distinctive brand asset</li><li>Published transparent pricing &mdash; rare in peer-group category</li><li>13+ programs covering most of a PE exec&rsquo;s lifecycle</li><li>Multi-revenue stream mix: subscriptions + events + services + sponsorships</li><li>High-quality unprompted testimonials demonstrating value realization</li></ul></div></div>
+<div class="swot w"><div class="swot-header"><i data-lucide="alert-triangle"></i> Weaknesses</div><div class="swot-body"><ul class="swot-list"><li>13+ programs + 5+ tiers create choice paralysis before conversion</li><li>Dated WordPress + Elementor template undercuts premium positioning</li><li>Kit Lisle&rsquo;s public voice under-indexes his category standing</li><li>PEbacked.solutions sister community adds narrative complexity</li><li>No published enterprise / Portfolio Pass tier &mdash; largest revenue opportunity unbuilt</li><li>Member testimonials buried below registration forms</li></ul></div></div>
+<div class="swot o"><div class="swot-header"><i data-lucide="rocket"></i> Opportunities</div><div class="swot-body"><ul class="swot-list"><li>PE firm Portfolio Pass tier &mdash; 10x revenue potential</li><li>Proprietary research from member panel &mdash; category-defining content</li><li>Executive search firm partnerships for transition-tier members</li><li>PE industry conference sponsorship for brand visibility</li><li>International expansion: UK, EU, Middle East PE communities</li><li>AI-enabled introductions matching at scale</li></ul></div></div>
+<div class="swot t"><div class="swot-header"><i data-lucide="cloud-lightning"></i> Threats</div><div class="swot-body"><ul class="swot-list"><li>Generalist CEO communities (YPO, Vistage) adding PE-specific offerings</li><li>PE firms building in-house portfolio executive networks</li><li>LinkedIn Groups and Slack communities for free alternatives</li><li>Executive search firms offering free &ldquo;community&rdquo; as recruitment tool</li><li>PE market pullback reducing new portfolio executive hires</li></ul></div></div>
+</div>
+</section>
+  </div>
+</main>
+</div>
+
+<script>
+const navItems=document.querySelectorAll('.nav-item');
+const sections=document.querySelectorAll('.section');
+const sidebar=document.querySelector('.sidebar');
+const overlay=document.querySelector('.overlay');
+navItems.forEach(i=>{
+  i.addEventListener('click',()=>{
+    const id=i.dataset.section;
+    navItems.forEach(n=>n.classList.remove('active'));
+    i.classList.add('active');
+    sections.forEach(s=>{ s.classList.remove('active'); if(s.id===id)s.classList.add('active'); });
+    sidebar.classList.remove('open'); overlay.classList.remove('open');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+function toggleSidebar(){ sidebar.classList.toggle('open'); overlay.classList.toggle('open'); }
+if(window.lucide) lucide.createIcons();
+</script>
+</body>
+</html>
