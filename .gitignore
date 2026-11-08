@@ -1,3 +1,6 @@
 Claude outputs/
 # generated website copy exports — not part of the site
 RGP-Website-Copy*.docx
+
+# original full-size video sources (too large for hosting)
+assets/Video/_originals/
