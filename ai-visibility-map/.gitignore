@@ -6,3 +6,6 @@ data/
 .env.*
 node_modules/
 dist/
+web/public/run.json
+config/brand.json
+!.env.example

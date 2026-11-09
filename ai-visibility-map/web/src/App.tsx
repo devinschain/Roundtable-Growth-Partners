@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Bar, BarChart, CartesianGrid, Cell, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { COMPANIES, ENGINES, avg, type Company } from './data'
+import Prospect from './Prospect'
 
 const TEAL = '#176F73', TEAL_L = '#5CC4C8', AMBER = '#E3A52B', SLATE = '#24313A'
 const INDUSTRIES = [...new Set(COMPANIES.map(c => c.industry))]
@@ -17,7 +18,7 @@ function Header({ route }: { route: string }) {
           <svg width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="17" r="15" fill="none" stroke={TEAL_L} strokeWidth="2.5" /><circle cx="17" cy="17" r="5" fill={TEAL_L} /></svg>
           <div><div className="font-serif text-lg leading-none">AI Visibility Map</div><div className="text-xs text-white/60">Roundtable Growth Partners</div></div>
         </a>
-        <div className="flex items-center gap-4 text-sm"><a href="#/" className={route === '' ? 'font-semibold' : 'text-white/70'}>Market</a><Sample /></div>
+        <div className="flex items-center gap-4 text-sm"><a href="#/" className={route === '' ? 'font-semibold' : 'text-white/70'}>Prospect report</a><a href="#/market" className={route === 'market' ? 'font-semibold' : 'text-white/70'}>Market</a>{route !== '' && <Sample />}</div>
       </div>
     </header>
   )
@@ -64,7 +65,7 @@ function Dashboard() {
 function Report({ c }: { c: Company }) {
   return (
     <main className="max-w-4xl mx-auto px-5 py-8 space-y-5">
-      <div className="flex justify-between items-start no-print"><a href="#/" className="text-teal-rgp font-medium">← Back to market</a><button onClick={() => window.print()} className="px-4 py-2 rounded-lg bg-teal-rgp text-white text-sm">Save as PDF</button></div>
+      <div className="flex justify-between items-start no-print"><a href="#/market" className="text-teal-rgp font-medium">← Back to market</a><button onClick={() => window.print()} className="px-4 py-2 rounded-lg bg-teal-rgp text-white text-sm">Save as PDF</button></div>
       <div className="flex justify-between items-end border-b border-line pb-4">
         <div><div className="text-xs uppercase tracking-wide text-steel">AI Visibility Report</div><h1 className="text-3xl">{c.name}</h1><p className="text-steel">{c.industry} · {c.city} · {c.size} staff · {c.group} group</p></div>
         <div className="text-right"><div className="font-serif text-6xl text-teal-rgp leading-none">{c.score}</div><div className="text-xs text-steel">of 100</div></div>
@@ -88,5 +89,5 @@ export default function App() {
   const [hash, setHash] = useState(location.hash.replace('#/', ''))
   useEffect(() => { const f = () => { setHash(location.hash.replace('#/', '')); window.scrollTo(0, 0) }; addEventListener('hashchange', f); return () => removeEventListener('hashchange', f) }, [])
   const m = hash.match(/^c\/(.+)$/), c = m ? COMPANIES.find(x => x.id === m[1]) : undefined
-  return <><Header route={hash} />{c ? <Report c={c} /> : <Dashboard />}</>
+  return <><Header route={hash} />{c ? <Report c={c} /> : hash === 'market' ? <Dashboard /> : <Prospect />}</>
 }

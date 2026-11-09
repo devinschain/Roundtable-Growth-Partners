@@ -1,0 +1,13 @@
+{
+  "brand": "SAMPLE Brand Fitness",
+  "industry": "fitness studios",
+  "domain": "samplebrand.example",
+  "locations": [
+    { "city": "New York", "address": "12 Sample St", "group": "test" },
+    { "city": "Chicago", "address": "40 Example Ave", "group": "test" },
+    { "city": "Austin", "address": "8 Demo Blvd", "group": "test" },
+    { "city": "Denver", "address": "77 Sample Rd", "group": "control" },
+    { "city": "Miami", "address": "3 Example Way", "group": "control" },
+    { "city": "Seattle", "address": "95 Demo Ln", "group": "control" }
+  ]
+}
