@@ -143,7 +143,7 @@ nav a{font-size:.92rem}
 @media(max-width:1080px){nav{top:80px!important}nav ul{gap:16px!important}}
 /* hero with full-bleed photo */
 .hero-bg{position:relative;overflow:hidden;color:#fff;background:var(--deep);padding:0}
-.hero-media{position:absolute;top:0;bottom:0;right:0;left:38%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);mask-image:linear-gradient(90deg,transparent 0,#000 30%);background:url(assets/Photos/hero.jpg) center 50%/cover no-repeat;animation:herozoom 28s ease-in-out infinite alternate}
+.hero-media{position:absolute;top:0;bottom:0;right:0;left:34%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 34%);mask-image:linear-gradient(90deg,transparent 0,#000 34%);background:url(assets/Photos/adaptive-leadership-1.jpg) 38% 50%/cover no-repeat;animation:herozoom 28s ease-in-out infinite alternate}
 .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,22,27,.55) 0%,rgba(14,22,27,.5) 40%,rgba(14,22,27,.3) 66%,rgba(14,22,27,.38) 100%)}
 .hero-inner{position:relative;z-index:1;padding-top:110px;padding-bottom:100px;max-width:1280px}
 .hero-inner>*{max-width:680px}
