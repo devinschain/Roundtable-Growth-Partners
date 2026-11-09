@@ -25,11 +25,9 @@ nav a[aria-current="page"]{color:var(--teal)}
 .menu{display:none;background:none;border:2px solid var(--slate);border-radius:6px;padding:8px 12px;font:inherit;font-weight:600;color:var(--slate);cursor:pointer}
 /* hero */
 .hero{padding:84px 0 72px;background:linear-gradient(180deg,var(--cloud),#fff)}
-.hero-grid{display:block}
-.hero-video{aspect-ratio:1198/625;width:100%;max-width:none;margin:36px 0 48px!important}
-.hero .lead{max-width:none}
-.hero h1{margin-bottom:20px;font-size:clamp(2rem,4vw,3.3rem);line-height:1.12}
-@media(min-width:900px){.hero h1 br{display:none}}.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:stretch;margin-top:34px}
+.hero-grid figure{height:100%;min-height:400px}
+.hero h1{margin-bottom:22px}.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
 .sectors{margin-top:26px;font-size:.92rem;color:var(--steel)}.sectors b{color:var(--slate)}
 .table-fig{max-width:430px;margin-left:auto;width:100%}
 .table-fig text{font-family:var(--sans);font-size:11.5px;font-weight:600;fill:var(--slate);text-anchor:middle}
@@ -113,7 +111,7 @@ footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;a
 .pillar{position:relative}
 .pillar .card{margin-top:30px;padding-top:44px;height:100%;box-sizing:border-box}
 .pillar-badge{position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:58px;border-radius:50%;background:var(--teal);color:#fff;font-family:var(--serif);font-weight:700;font-size:1.6rem;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(23,111,115,.30);border:4px solid #fff;z-index:3}
-@media(max-width:760px){.hero-grid{grid-template-columns:1fr;gap:32px}}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr;gap:32px}.hero-grid figure{min-height:300px}}
 /* scroll reveal */
 .js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
 .js .reveal.in{opacity:1;transform:none}
