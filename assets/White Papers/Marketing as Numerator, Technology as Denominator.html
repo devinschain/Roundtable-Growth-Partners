@@ -1,0 +1,666 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Marketing as Numerator, Technology as Denominator</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout concept: a dark Roundtable cover band, then one narrow reading column on cloud, with two drawn figures (the ratio and the loop) and tables that fold into stacked rows on phones. */
+:root {
+  --bg: #F2F5F6;
+  --paper: #FFFFFF;
+  --ink: #24313A;
+  --ink-2: #5B6B75;
+  --line: #DCE3E6;
+  --accent: #176F73;
+  --accent-2: #5CC4C8;
+  --tint: #E6EFF0;
+  --hl-soft: rgba(227, 165, 43, 0.40);
+  --hl: #E3A52B;
+  --band: #24313A;
+  --band-ink: #FFFFFF;
+  --band-ink-2: #B9C7CE;
+  --box-a: #176F73;
+  --box-b: #24313A;
+  --box-ink: #FFFFFF;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141D23;
+    --paper: #1B2730;
+    --ink: #E8EEF0;
+    --ink-2: #9FB0B9;
+    --line: #2D3C46;
+    --accent: #5CC4C8;
+    --tint: #22323B;
+    --hl-soft: rgba(227, 165, 43, 0.30);
+    --band: #0F161B;
+    --box-b: #2E3F4A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141D23;
+  --paper: #1B2730;
+  --ink: #E8EEF0;
+  --ink-2: #9FB0B9;
+  --line: #2D3C46;
+  --accent: #5CC4C8;
+  --tint: #22323B;
+  --hl-soft: rgba(227, 165, 43, 0.30);
+  --band: #0F161B;
+  --box-b: #2E3F4A;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.gutter {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.inner { max-width: 760px; margin: 0 auto; }
+
+/* Cover */
+.cover { background: var(--band); color: var(--band-ink); padding-block: 28px 56px; }
+.cover .logo { height: 44px; width: auto; display: block; }
+.cover .eyebrow {
+  margin: 56px 0 14px;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent-2);
+}
+.cover h1 {
+  margin: 0;
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(2rem, 5.4vw, 3.3rem); line-height: 1.1;
+  text-wrap: balance;
+}
+.cover .lede {
+  margin: 20px 0 0; max-width: 34em;
+  font-size: 1.15rem; line-height: 1.55; color: var(--band-ink-2);
+}
+.cover .meta { margin: 32px 0 0; font-size: 0.88rem; color: var(--band-ink-2); }
+.cover .meta b { color: var(--band-ink); font-weight: 600; }
+
+/* Reading column */
+main { padding-block: 24px 64px; }
+section { padding-top: 48px; }
+h2 {
+  margin: 0 0 16px;
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(1.45rem, 3.4vw, 1.85rem); line-height: 1.2;
+  text-wrap: balance; color: var(--ink);
+}
+h3 { margin: 28px 0 8px; font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: var(--ink); }
+p { margin: 0 0 16px; }
+ul, ol { margin: 0 0 16px; padding-left: 1.3em; }
+li { margin-bottom: 8px; }
+li::marker { color: var(--accent); }
+strong { font-weight: 600; }
+.hl { background: linear-gradient(transparent 55%, var(--hl-soft) 55%); padding: 0 2px; }
+.note { font-size: 0.88rem; color: var(--ink-2); }
+
+/* Formula */
+.formula {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 16px 20px;
+  margin: 24px 0; padding: 22px 24px;
+  background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+}
+.formula .lhs { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; }
+.formula .eq { font-family: var(--serif); font-size: 1.4rem; color: var(--ink-2); }
+.frac { display: flex; flex-direction: column; align-items: stretch; min-width: 0; flex: 1 1 240px; text-align: center; }
+.frac .top { padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+.frac .bot { padding-top: 8px; }
+.frac small { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.frac span { font-size: 0.98rem; line-height: 1.4; }
+
+/* Figures */
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; margin: 24px 0; }
+.fig { margin: 0; padding: 16px 16px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.fig svg { display: block; width: 100%; height: auto; max-width: 100%; }
+.fig figcaption { margin-top: 8px; font-size: 0.86rem; color: var(--ink-2); line-height: 1.5; }
+.s-box-a { fill: var(--box-a); }
+.s-box-b { fill: var(--box-b); }
+.s-ink { fill: var(--box-ink); font-family: var(--sans); }
+.s-cap { font-size: 10.5px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; }
+.s-body { font-size: 13.5px; font-weight: 500; }
+.s-bar { stroke: var(--ink); stroke-width: 2.5; fill: none; }
+.s-ring { stroke: var(--line); stroke-width: 2; fill: none; }
+.s-arc { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+.s-head { fill: var(--accent); }
+.s-label { fill: var(--ink-2); font-family: var(--sans); font-size: 13px; }
+
+/* Tables */
+.tablewrap { margin: 20px 0 8px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.94rem; line-height: 1.5; }
+th, td { padding: 12px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); min-width: 0; }
+thead th { background: var(--tint); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+tbody th { font-weight: 600; color: var(--ink); width: 22%; }
+td.when { white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+
+/* Two-column lists */
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 20px 0; }
+.pair > div { padding: 20px 22px 8px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.pair h3 { margin-top: 0; }
+
+/* Checklist */
+ul.check { list-style: none; padding-left: 0; }
+ul.check li { position: relative; padding-left: 32px; }
+ul.check li::before {
+  content: ""; position: absolute; left: 0; top: 0.28em; width: 18px; height: 18px;
+  border: 2px solid var(--accent); border-radius: 4px;
+}
+
+/* Charts */
+.fig.solo { margin: 24px 0; }
+.fig.narrow { max-width: 440px; margin: 24px auto; }
+.charts { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.ct { margin: 0 0 2px; font-family: var(--serif); font-weight: 600; font-size: 1.05rem; line-height: 1.3; color: var(--ink); }
+.cs { margin: 0 0 12px; font-size: 0.8rem; color: var(--ink-2); line-height: 1.4; }
+.c-base { stroke: var(--ink-2); stroke-width: 1.5; fill: none; }
+.c-grid { stroke: var(--line); stroke-width: 1.5; fill: none; }
+.c-val { fill: var(--ink); font-family: var(--sans); font-size: 13px; font-weight: 600; }
+.c-cat { fill: var(--ink); font-family: var(--sans); font-size: 12.5px; }
+.c-sub { fill: var(--ink-2); font-family: var(--sans); font-size: 11.5px; }
+.b-mute { fill: color-mix(in srgb, var(--ink-2) 40%, var(--paper)); }
+.b-a { fill: var(--box-a); }
+.b-b { fill: var(--box-b); }
+.b-focus { fill: var(--accent); }
+.b-hl { fill: var(--hl); }
+.sc { overflow-x: auto; }
+.sc svg { min-width: 820px; }
+.t-axis { stroke: var(--ink-2); stroke-width: 2; }
+.t-stem { stroke: var(--line); stroke-width: 2; }
+.t-dot { fill: var(--accent); stroke: var(--paper); stroke-width: 3; }
+.t-year { fill: var(--ink); font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.t-text { fill: var(--ink-2); font-family: var(--sans); font-size: 12.5px; }
+.t-tick { fill: var(--ink-2); font-family: var(--sans); font-size: 11px; }
+
+/* Pull quote */
+blockquote.quote { margin: 28px 0; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+blockquote.quote p { margin: 0 0 10px; font-family: var(--serif); font-weight: 500; font-size: clamp(1.35rem, 3.6vw, 1.75rem); line-height: 1.3; color: var(--ink); text-wrap: balance; }
+blockquote.quote cite { font-style: normal; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+
+/* Footer */
+footer { background: var(--band); color: var(--band-ink-2); padding-block: 32px; font-size: 0.86rem; }
+footer b { color: var(--band-ink); font-family: var(--serif); font-size: 1.05rem; font-weight: 600; }
+footer p { margin: 0 0 6px; }
+
+:focus-visible { outline: 3px solid #E3A52B; outline-offset: 2px; }
+
+/* Tables fold into stacked rows on phones */
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .tablewrap { background: transparent; border: 0; overflow: visible; }
+  table, thead, tbody, tr, th, td { display: block; width: 100%; }
+  thead { position: absolute; left: -9999px; }
+  tbody tr { margin-bottom: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 6px 0; }
+  th, td { border-bottom: 0; padding: 8px 16px; }
+  tbody th { width: 100%; font-family: var(--serif); font-size: 1.05rem; padding-bottom: 2px; }
+  td[data-label]::before {
+    content: attr(data-label); display: block; margin-bottom: 2px;
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+  }
+  td.when { white-space: normal; }
+  .cover .eyebrow { margin-top: 40px; }
+}
+</style>
+
+<header class="cover gutter">
+  <div class="inner">
+    <svg class="logo" viewBox="0 0 330 100" role="img" aria-label="Roundtable Growth Partners" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="44" fill="none" stroke="#FFFFFF" stroke-width="3.5"/>
+      <circle cx="50" cy="6" r="5.5" fill="#5CC4C8"/>
+      <text x="50" y="61.5" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="32" font-weight="700" fill="#FFFFFF" letter-spacing=".5">RGP</text>
+      <text x="112" y="52" font-family="Fraunces,Georgia,serif" font-size="34" font-weight="700" fill="#FFFFFF">Roundtable</text>
+      <text x="113" y="76" font-family="Inter,system-ui,Arial,sans-serif" font-size="13.5" letter-spacing="4.2" font-weight="600" fill="#5CC4C8">GROWTH PARTNERS</text>
+    </svg>
+    <p class="eyebrow">White paper</p>
+    <h1>Marketing as Numerator, Technology as Denominator</h1>
+    <p class="lede">Improve both sides of the ratio, and let each feed the other.</p>
+    <p class="meta"><b>Roundtable Growth Partners</b> &nbsp;&middot;&nbsp; November 2026</p>
+  </div>
+</header>
+
+<main class="gutter">
+  <div class="inner">
+
+    <section id="summary" style="padding-top: 40px;">
+      <h2>Executive summary</h2>
+      <p>Growth efficiency is a ratio, and most companies work on only half of it. Marketing is the numerator: customers won times the value of each. Technology is the denominator: the cost, risk and delay carried by each customer won.</p>
+
+      <div class="formula" role="math" aria-label="Growth efficiency equals marketing, customers won times value per customer, divided by technology, cost, risk and delay per customer">
+        <span class="lhs">Growth efficiency</span>
+        <span class="eq">=</span>
+        <div class="frac">
+          <div class="top"><small>Marketing</small><span>customers won &times; value per customer</span></div>
+          <div class="bot"><small>Technology and IT</small><span>cost, risk and delay per customer</span></div>
+        </div>
+      </div>
+
+      <p>Capital One showed in the 1990s that when marketing and technology run as one learning loop, the ratio improves from both sides. AI now lets any growth team run a version of that loop. But AI gets cheaper and better for everyone, so it changes where the edge sits.</p>
+      <blockquote class="quote">
+        <p>Credit cards aren't banking, they're information.</p>
+        <cite>Richard Fairbank, CEO, Capital One</cite>
+      </blockquote>
+      <p>Swap underwriting for technology and the story reads as if it were written for today. The better your marketing, the better your technology. The better your technology, the better your marketing.</p>
+      <p>Three ideas carry this paper:</p>
+      <ul>
+        <li><strong>Improve both sides together.</strong> A better denominator lets marketing target and price more sharply, and better marketing gives technology better data to learn from.</li>
+        <li><strong>Let AI lower the denominator, and protect the numerator.</strong> <span class="hl">The numerator is what competitors cannot copy:</span> what a brand knows about itself, and the human judgment applied to it.</li>
+        <li><strong>Put one owner inside every client.</strong> One person or team should answer for both marketing and technology, so the loop keeps running after outside advisers leave.</li>
+      </ul>
+    </section>
+
+    <section id="ratio">
+      <h2>The ratio: marketing over technology</h2>
+      <p>The ratio improves from either side, but the edge comes from improving both at once. Each side sets the limits of the other.</p>
+
+      <div class="figs">
+        <figure class="fig">
+          <svg viewBox="0 0 340 300" role="img" aria-label="Marketing sits above technology and IT, separated by a fraction bar">
+            <rect class="s-box-a" x="20" y="24" width="300" height="94" rx="6"/>
+            <text class="s-ink s-cap" x="40" y="52">Numerator</text>
+            <text class="s-ink" x="40" y="78" font-size="19" font-weight="600" font-family="Fraunces, Georgia, serif">Marketing</text>
+            <text class="s-ink s-body" x="40" y="101">customers won &#215; value per customer</text>
+            <line class="s-bar" x1="20" y1="150" x2="320" y2="150"/>
+            <rect class="s-box-b" x="20" y="182" width="300" height="94" rx="6"/>
+            <text class="s-ink s-cap" x="40" y="210">Denominator</text>
+            <text class="s-ink" x="40" y="236" font-size="19" font-weight="600" font-family="Fraunces, Georgia, serif">Technology and IT</text>
+            <text class="s-ink s-body" x="40" y="259">cost, risk and delay per customer</text>
+          </svg>
+          <figcaption>Marketing sets the value won. Technology sets what each win costs.</figcaption>
+        </figure>
+        <figure class="fig">
+          <svg viewBox="0 0 420 300" role="img" aria-label="A loop in which marketing passes first-party data to technology, and technology passes decisions back to marketing">
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="s-head" d="M0 0 L10 5 L0 10 z"/></marker>
+            </defs>
+            <circle class="s-ring" cx="210" cy="150" r="95"/>
+            <path class="s-arc" d="M264.5 72.2 A95 95 0 0 1 264.5 227.8" marker-end="url(#ah)"/>
+            <path class="s-arc" d="M155.5 227.8 A95 95 0 0 1 155.5 72.2" marker-end="url(#ah)"/>
+            <rect class="s-box-a" x="145" y="38" width="130" height="34" rx="17"/>
+            <text class="s-ink" x="210" y="60" text-anchor="middle" font-size="14" font-weight="600">Marketing</text>
+            <rect class="s-box-b" x="145" y="228" width="130" height="34" rx="17"/>
+            <text class="s-ink" x="210" y="250" text-anchor="middle" font-size="14" font-weight="600">Technology</text>
+            <text class="s-label" x="318" y="146">first-party</text>
+            <text class="s-label" x="318" y="164">data</text>
+            <text class="s-label" x="102" y="155" text-anchor="end">decisions</text>
+          </svg>
+          <figcaption>Marketing creates data, technology turns it into decisions, and the decisions sharpen the next round.</figcaption>
+        </figure>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th></th><th>Marketing (numerator)</th><th>Technology and IT (denominator)</th></tr></thead>
+          <tbody>
+            <tr><th>What it measures</th><td data-label="Marketing (numerator)">Customers won, pipeline, revenue, value per customer</td><td data-label="Technology and IT (denominator)">Cost, risk and delay per customer won</td></tr>
+            <tr><th>What it holds</th><td data-label="Marketing (numerator)">Brand, offers, targeting, content, sales follow-up</td><td data-label="Technology and IT (denominator)">Data, CRM, automation, AI, security, controls</td></tr>
+            <tr><th>How it improves</th><td data-label="Marketing (numerator)">Sharper targeting, faster test cycles, better offers</td><td data-label="Technology and IT (denominator)">Cheaper decisions, faster delivery, fewer failures</td></tr>
+            <tr><th>What it gives the other side</th><td data-label="Marketing (numerator)">Fresh first-party data to learn from</td><td data-label="Technology and IT (denominator)">A system that turns data into decisions</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Most firms treat these as two budgets run by two teams. Marketing buys campaigns that technology cannot measure. Technology builds systems that marketing cannot use. The ratio stays flat because neither side feeds the other.</p>
+      <p>The denominator is also more than a cost line. Better data and tooling let marketing aim and price more precisely. That is why the ratio improves from both sides at once, and why splitting the two teams hides the gain.</p>
+
+      <figure class="fig narrow">
+        <p class="ct">Why both sides beat either one</p>
+        <p class="cs">Illustrative growth efficiency, today = 1.00</p>
+        <svg viewBox="0 0 380 240" role="img" aria-label="Bar chart. Today 1.00. Marketing up 20 percent alone 1.20. Technology cost down 20 percent alone 1.25. Both together 1.50.">
+          <line class="c-grid" x1="20" y1="90" x2="360" y2="90" stroke-dasharray="4 4"/>
+          <rect class="b-mute" x="34" y="90" width="60" height="100" rx="3"/>
+          <rect class="b-a" x="119" y="70" width="60" height="120" rx="3"/>
+          <rect class="b-b" x="204" y="65" width="60" height="125" rx="3"/>
+          <rect class="b-hl" x="289" y="40" width="60" height="150" rx="3"/>
+          <line class="c-base" x1="20" y1="190" x2="360" y2="190"/>
+          <text class="c-val" x="64" y="82" text-anchor="middle">1.00&#215;</text>
+          <text class="c-val" x="149" y="62" text-anchor="middle">1.20&#215;</text>
+          <text class="c-val" x="234" y="57" text-anchor="middle">1.25&#215;</text>
+          <text class="c-val" x="319" y="32" text-anchor="middle">1.50&#215;</text>
+          <text class="c-cat" x="64" y="209" text-anchor="middle">Today</text>
+          <text class="c-cat" x="149" y="209" text-anchor="middle">Marketing</text>
+          <text class="c-sub" x="149" y="224" text-anchor="middle">gain +20%</text>
+          <text class="c-cat" x="234" y="209" text-anchor="middle">Technology</text>
+          <text class="c-sub" x="234" y="224" text-anchor="middle">cost &#8722;20%</text>
+          <text class="c-cat" x="319" y="209" text-anchor="middle">Both</text>
+          <text class="c-sub" x="319" y="224" text-anchor="middle">together</text>
+        </svg>
+        <figcaption>Cutting cost by 20% lifts the ratio 25%. A 20% gain in marketing lifts it 20%. Doing both lifts it 50%.</figcaption>
+      </figure>
+    </section>
+
+    <section id="capital-one">
+      <h2>What Capital One got right</h2>
+      <p>Capital One treated every offer as an experiment and built its organization so technology, analytics and marketing served one objective. Its founders put it simply: credit cards are not banking, they are information. By 1999 the company ran about 36,000 tests a year, and its stock had risen more than 1,000% since its 1994 IPO, against just under 300% for the S&amp;P 500 (Harvard Business School case 9-700-124).</p>
+      <p>Six mechanics from that case carry straight into a marketing and technology model.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Mechanic</th><th>What Capital One did</th><th>Translation for growth teams</th></tr></thead>
+          <tbody>
+            <tr><th>Information business</th><td data-label="What Capital One did">Treated the customer record as the core asset</td><td data-label="Translation for growth teams">Make the customer record, not the campaign, the thing you build</td></tr>
+            <tr><th>Test everything</th><td data-label="What Capital One did">Ran thousands of tests on samples of 1,000 to 50,000 people</td><td data-label="Translation for growth teams">Run small, cheap pilots with a decision rule set before launch</td></tr>
+            <tr><th>Private data over public data</th><td data-label="What Capital One did">Built its own response and risk data, because public scores suffered from adverse selection</td><td data-label="Translation for growth teams">Train your scoring on first-party data from your own campaigns</td></tr>
+            <tr><th>One team, one objective</th><td data-label="What Capital One did">Seated technologists beside analysts and marketers, reporting to one leader</td><td data-label="Translation for growth teams">One scorecard shared by marketing and IT</td></tr>
+            <tr><th>Cohort tracking and kill rules</th><td data-label="What Capital One did">Tracked each cohort and offer, and withdrew its balance transfer product in 1994 when returns fell</td><td data-label="Translation for growth teams">Judge offers on lifetime results and write stop criteria up front</td></tr>
+            <tr><th>Build to flex</th><td data-label="What Capital One did">Took a test from 20,000 customers to national rollout in about three months</td><td data-label="Translation for growth teams">Invest in systems that scale proven tests quickly</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Capital One by the numbers</h3>
+      <p>Four figures from the case show the loop at work.</p>
+
+      <div class="figs charts">
+        <figure class="fig">
+          <p class="ct">Stock price gain</p>
+          <p class="cs">Capital One vs the S&amp;P 500, IPO in 1994 to 2000</p>
+          <svg viewBox="0 0 380 220" role="img" aria-label="Bar chart. Capital One stock rose more than 1,000 percent. The S&amp;P 500 rose just under 300 percent.">
+            <rect class="b-focus" x="70" y="50" width="90" height="130" rx="3"/>
+            <rect class="b-mute" x="220" y="142" width="90" height="38" rx="3"/>
+            <line class="c-base" x1="40" y1="180" x2="340" y2="180"/>
+            <text class="c-val" x="115" y="42" text-anchor="middle">More than 1,000%</text>
+            <text class="c-val" x="265" y="134" text-anchor="middle">Just under 300%</text>
+            <text class="c-cat" x="115" y="202" text-anchor="middle">Capital One</text>
+            <text class="c-cat" x="265" y="202" text-anchor="middle">S&amp;P 500</text>
+          </svg>
+          <figcaption>Source: Harvard Business School case 9-700-124.</figcaption>
+        </figure>
+
+        <figure class="fig">
+          <p class="ct">Charge-off rate by issuer</p>
+          <p class="cs">Percent of balances, Q1 2000. Lower is better. * estimate</p>
+          <svg viewBox="0 0 380 290" role="img" aria-label="Horizontal bar chart of charge-off rates. Capital One 3.87 percent is lowest, rising to Metris at 9.80 percent.">
+            <line class="c-base" x1="116" y1="4" x2="116" y2="284"/>
+            <text class="c-cat" x="108" y="25" text-anchor="end">Capital One</text><rect class="b-focus" x="116" y="12" width="79.4" height="16" rx="2"/><text class="c-val" x="201" y="25">3.87%</text>
+            <text class="c-cat" x="108" y="48" text-anchor="end">MBNA</text><rect class="b-mute" x="116" y="35" width="83.2" height="16" rx="2"/><text class="c-val" x="205" y="48">4.06%</text>
+            <text class="c-cat" x="108" y="71" text-anchor="end">Citigroup</text><rect class="b-mute" x="116" y="58" width="89.2" height="16" rx="2"/><text class="c-val" x="211" y="71">4.35%</text>
+            <text class="c-cat" x="108" y="94" text-anchor="end">AmEx*</text><rect class="b-mute" x="116" y="81" width="92.3" height="16" rx="2"/><text class="c-val" x="214" y="94">4.50%</text>
+            <text class="c-cat" x="108" y="117" text-anchor="end">Discover</text><rect class="b-mute" x="116" y="104" width="95.5" height="16" rx="2"/><text class="c-val" x="217" y="117">4.66%</text>
+            <text class="c-cat" x="108" y="140" text-anchor="end">Chase</text><rect class="b-mute" x="116" y="127" width="110.9" height="16" rx="2"/><text class="c-val" x="233" y="140">5.41%</text>
+            <text class="c-cat" x="108" y="163" text-anchor="end">BankAmerica</text><rect class="b-mute" x="116" y="150" width="111.3" height="16" rx="2"/><text class="c-val" x="233" y="163">5.43%</text>
+            <text class="c-cat" x="108" y="186" text-anchor="end">Household</text><rect class="b-mute" x="116" y="173" width="116.6" height="16" rx="2"/><text class="c-val" x="238" y="186">5.69%</text>
+            <text class="c-cat" x="108" y="209" text-anchor="end">Bank One</text><rect class="b-mute" x="116" y="196" width="118.5" height="16" rx="2"/><text class="c-val" x="240" y="209">5.78%</text>
+            <text class="c-cat" x="108" y="232" text-anchor="end">Fleet</text><rect class="b-mute" x="116" y="219" width="125.3" height="16" rx="2"/><text class="c-val" x="247" y="232">6.11%</text>
+            <text class="c-cat" x="108" y="255" text-anchor="end">Providian*</text><rect class="b-mute" x="116" y="242" width="139" height="16" rx="2"/><text class="c-val" x="261" y="255">6.78%</text>
+            <text class="c-cat" x="108" y="278" text-anchor="end">Metris</text><rect class="b-mute" x="116" y="265" width="200.9" height="16" rx="2"/><text class="c-val" x="323" y="278">9.80%</text>
+          </svg>
+          <figcaption>Source: case exhibit 9, compiled from annual reports.</figcaption>
+        </figure>
+
+        <figure class="fig">
+          <p class="ct">Cost per new customer</p>
+          <p class="cs">Four representative campaigns, with the response rate each earned</p>
+          <svg viewBox="0 0 380 215" role="img" aria-label="Horizontal bar chart. Standard campaign 155 dollars at 0.5 percent response. Teaser 168 dollars at 1.5 percent. Co-brand 110 dollars at 1.5 percent. Underserved customers 47 dollars at 3.0 percent.">
+            <line class="c-base" x1="130" y1="8" x2="130" y2="205"/>
+            <text class="c-cat" x="122" y="30" text-anchor="end">Standard</text><text class="c-sub" x="122" y="46" text-anchor="end">0.5% response</text>
+            <rect class="b-mute" x="130" y="22" width="184.5" height="26" rx="2"/><text class="c-val" x="320" y="40">$155</text>
+            <text class="c-cat" x="122" y="80" text-anchor="end">Teaser</text><text class="c-sub" x="122" y="96" text-anchor="end">1.5% response</text>
+            <rect class="b-mute" x="130" y="72" width="200" height="26" rx="2"/><text class="c-val" x="336" y="90">$168</text>
+            <text class="c-cat" x="122" y="130" text-anchor="end">Co-brand</text><text class="c-sub" x="122" y="146" text-anchor="end">1.5% response</text>
+            <rect class="b-mute" x="130" y="122" width="131" height="26" rx="2"/><text class="c-val" x="267" y="140">$110</text>
+            <text class="c-cat" x="122" y="180" text-anchor="end">Underserved</text><text class="c-sub" x="122" y="196" text-anchor="end">3.0% response</text>
+            <rect class="b-focus" x="130" y="172" width="56" height="26" rx="2"/><text class="c-val" x="192" y="190">$47</text>
+          </svg>
+          <figcaption>Higher response means a cheaper customer. Source: Credit Card Industry Picture Book (PaineWebber, May 1999), as cited in the case.</figcaption>
+        </figure>
+
+        <figure class="fig">
+          <p class="ct">Marketing spend on new products</p>
+          <p class="cs">Share of the 1999 budget ($750M) spent on products that did not exist...</p>
+          <svg viewBox="0 0 380 190" role="img" aria-label="Bar chart. Over 55 percent of the budget went to products that did not exist six months before, 80 percent to products that did not exist a year before, and over 95 percent to products that did not exist two years before.">
+            <text class="c-cat" x="10" y="20">six months earlier</text>
+            <rect class="b-a" x="10" y="28" width="181.5" height="22" rx="3"/><text class="s-ink c-val" x="184" y="44" text-anchor="end" style="fill:#fff">55%+</text>
+            <text class="c-cat" x="10" y="80">a year earlier</text>
+            <rect class="b-a" x="10" y="88" width="264" height="22" rx="3"/><text class="s-ink c-val" x="267" y="104" text-anchor="end" style="fill:#fff">80%</text>
+            <text class="c-cat" x="10" y="140">two years earlier</text>
+            <rect class="b-a" x="10" y="148" width="313.5" height="22" rx="3"/><text class="s-ink c-val" x="316" y="164" text-anchor="end" style="fill:#fff">95%+</text>
+          </svg>
+          <figcaption>Half-lives were short, so the loop had to keep producing new offers. Source: Harvard Business School case 9-700-124.</figcaption>
+        </figure>
+      </div>
+
+      <h3>A test in one paragraph</h3>
+      <p>When a customer called Capital One to say "I'm leaving," the company did not guess who was bluffing. It split those callers at random into three groups. Group one had the bluff called and the account closed. Group two got the competing offer matched. Group three was met halfway. It then tracked what each group did next and built a model from the results. Today the service representative sees an instant recommendation on screen, such as lowering the rate to 12.9%.</p>
+      <p>That is a pilot with a holdout group and a decision rule, run long before anyone used those words. It is the smallest unit of the loop: one question, randomized groups, and one result that feeds the next decision.</p>
+
+      <h3>What the habit bought</h3>
+      <p>The habit showed up in the budget. Of its $750 million marketing spend in 1999, more than 55% went to products that did not exist six months earlier. It also treated data as the asset. Before Fairbank and Morris arrived, the bank that hired them routinely erased and reused customer data tapes to save $40 each.</p>
+      <p>The pattern is a loop, not a tool. Marketing creates data, technology turns it into decisions, and the decisions sharpen the next round of marketing.</p>
+    </section>
+
+    <section id="ai">
+      <h2>What changed with AI</h2>
+      <p>AI lowers the denominator and raises the numerator at the same time. It cuts the cost per decision, per asset and per follow-up, and it sharpens targeting and shortens test cycles. The catch is that it does this for every competitor. A cost advantage that anyone can rent is not an edge for long.</p>
+      <p>Capital One's record since 2000 shows what lasts. The loop survived, but the denominator was rebuilt three times: first owned data, then an owned cloud platform, then an owned AI stack.</p>
+
+      <figure class="fig solo">
+        <p class="ct">The loop across 38 years</p>
+        <p class="cs">Capital One, 1988 to 2026</p>
+        <div class="sc">
+          <svg viewBox="0 0 900 300" role="img" aria-label="Timeline of Capital One from 1988 to 2026: founders join Signet in 1988, balance transfer rollout in 1992, spin-off IPO in 1994, 36,000 tests in 1999, a data exposure in 2019, the last data center closed in 2020, the Discover deal in 2025 and the Brex purchase in 2026.">
+            <line class="t-axis" x1="40" y1="150" x2="880" y2="150"/>
+            <line class="c-base" x1="101" y1="145" x2="101" y2="155"/><text class="t-tick" x="101" y="172" text-anchor="middle">1990</text>
+            <line class="c-base" x1="306" y1="145" x2="306" y2="155"/><text class="t-tick" x="306" y="172" text-anchor="middle">2000</text>
+            <line class="c-base" x1="512" y1="145" x2="512" y2="155"/><text class="t-tick" x="512" y="172" text-anchor="middle">2010</text>
+
+            <line class="t-stem" x1="60" y1="92" x2="60" y2="150"/>
+            <text class="t-year" x="60" y="34" text-anchor="middle">1988</text>
+            <text class="t-text" x="60" y="52" text-anchor="middle">Founders join</text>
+            <text class="t-text" x="60" y="67" text-anchor="middle">Signet, take over</text>
+            <text class="t-text" x="60" y="82" text-anchor="middle">marketing and IT</text>
+
+            <line class="t-stem" x1="183" y1="92" x2="183" y2="150"/>
+            <text class="t-year" x="183" y="34" text-anchor="middle">1994</text>
+            <text class="t-text" x="183" y="52" text-anchor="middle">Spin-off IPO,</text>
+            <text class="t-text" x="183" y="67" text-anchor="middle">$1.1B; balance</text>
+            <text class="t-text" x="183" y="82" text-anchor="middle">transfer withdrawn</text>
+
+            <line class="t-stem" x1="696" y1="92" x2="696" y2="150"/>
+            <text class="t-year" x="696" y="34" text-anchor="middle">2019</text>
+            <text class="t-text" x="696" y="52" text-anchor="middle">Data exposed for</text>
+            <text class="t-text" x="696" y="67" text-anchor="middle">about 106 million</text>
+            <text class="t-text" x="696" y="82" text-anchor="middle">people</text>
+
+            <line class="t-stem" x1="819" y1="92" x2="819" y2="150"/>
+            <text class="t-year" x="819" y="34" text-anchor="middle">2025</text>
+            <text class="t-text" x="819" y="52" text-anchor="middle">Discover deal</text>
+            <text class="t-text" x="819" y="67" text-anchor="middle">closes, $35.3B</text>
+            <text class="t-text" x="819" y="82" text-anchor="middle">(May)</text>
+
+            <line class="t-stem" x1="142" y1="150" x2="142" y2="208"/>
+            <text class="t-year" x="142" y="234" text-anchor="middle">1992</text>
+            <text class="t-text" x="142" y="252" text-anchor="middle">Balance transfer</text>
+            <text class="t-text" x="142" y="267" text-anchor="middle">offer rolled out</text>
+            <text class="t-text" x="142" y="282" text-anchor="middle">nationwide</text>
+
+            <line class="t-stem" x1="286" y1="150" x2="286" y2="208"/>
+            <text class="t-year" x="286" y="234" text-anchor="middle">1999</text>
+            <text class="t-text" x="286" y="252" text-anchor="middle">36,000 tests in</text>
+            <text class="t-text" x="286" y="267" text-anchor="middle">one year, on a</text>
+            <text class="t-text" x="286" y="282" text-anchor="middle">$750M budget</text>
+
+            <line class="t-stem" x1="717" y1="150" x2="717" y2="208"/>
+            <text class="t-year" x="717" y="234" text-anchor="middle">2020</text>
+            <text class="t-text" x="717" y="252" text-anchor="middle">Last of eight</text>
+            <text class="t-text" x="717" y="267" text-anchor="middle">data centers</text>
+            <text class="t-text" x="717" y="282" text-anchor="middle">closed (Dec)</text>
+
+            <line class="t-stem" x1="840" y1="150" x2="840" y2="208"/>
+            <text class="t-year" x="840" y="234" text-anchor="middle">2026</text>
+            <text class="t-text" x="840" y="252" text-anchor="middle">Brex purchase</text>
+            <text class="t-text" x="840" y="267" text-anchor="middle">closes, $5.15B</text>
+            <text class="t-text" x="840" y="282" text-anchor="middle">(Apr)</text>
+
+            <circle class="t-dot" cx="60" cy="150" r="7"/>
+            <circle class="t-dot" cx="142" cy="150" r="7"/>
+            <circle class="t-dot" cx="183" cy="150" r="7"/>
+            <circle class="t-dot" cx="286" cy="150" r="7"/>
+            <circle class="t-dot" cx="696" cy="150" r="7"/>
+            <circle class="t-dot" cx="717" cy="150" r="7"/>
+            <circle class="t-dot" cx="819" cy="150" r="7"/>
+            <circle class="t-dot" cx="840" cy="150" r="7"/>
+          </svg>
+        </div>
+        <figcaption>Dates are spaced to scale. Sources: Harvard Business School case 9-700-124 and the Roundtable executive summary (updated November 3, 2026).</figcaption>
+      </figure>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>When</th><th>What happened</th><th>Lesson for the ratio</th></tr></thead>
+          <tbody>
+            <tr><td class="when" data-label="When">Apr 2026</td><td data-label="What happened">Closed the $5.15B Brex purchase, an AI-native platform that automates expense and accounting work</td><td data-label="Lesson for the ratio">Buy the denominator when speed matters, then pair it with your own data and judgment</td></tr>
+            <tr><td class="when" data-label="When">Dec 2025</td><td data-label="What happened">Reported up to 55% gains in lead conversion from a multi-agent assistant for auto dealers (company-reported)</td><td data-label="Lesson for the ratio">Start AI at the low-risk end, with an independent check on every plan</td></tr>
+            <tr><td class="when" data-label="When">Dec 2020</td><td data-label="What happened">Closed its last of eight data centers after an eight-year move to AWS, with an engineering-heavy workforce</td><td data-label="Lesson for the ratio">An elastic denominator scales with demand, but only if you hire and retrain for it</td></tr>
+            <tr><td class="when" data-label="When">2019 to 2020</td><td data-label="What happened">A misconfigured application exposed data on about 106 million people, and regulators fined the bank $80M</td><td data-label="Lesson for the ratio">Controls belong inside the denominator, because cost per customer includes the cost of a breach</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The lesson for clients is to own the parts of the denominator that generate learning, such as the data and the models, and to rent or buy the rest. Most teams have not built that system yet. Gartner's 2026 survey found CMOs put an average of 15.3% of marketing budgets into AI, while only 30% report mature AI readiness.</p>
+    </section>
+
+    <section id="leaders">
+      <h2>Other leaders who run marketing on a technology system</h2>
+      <p>The same pattern shows up wherever marketing runs on a technology system that learns. Marketing creates data, technology turns it into decisions, and the decisions sharpen the next round of marketing.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Company</th><th>How technology lowers the denominator</th><th>How marketing gains</th><th>Evidence</th></tr></thead>
+          <tbody>
+            <tr><th>Progressive</th><td data-label="How technology lowers the denominator">Telematics data prices each driver, and continuous monitoring replaced a single term of data</td><td data-label="How marketing gains">Discounts and surcharges segment customers, and renewals ran 6% above average for the biggest discount earners</td><td data-label="Evidence">Executives call telematics their most predictive rating variable; take-rates in Q4 2022 were up 40% over January 2019</td></tr>
+            <tr><th>Booking.com</th><td data-label="How technology lowers the denominator">One experimentation platform, with a searchable record of every past win and failure</td><td data-label="How marketing gains">Every change is wrapped in an experiment, so conversion improves by many small proven steps</td><td data-label="Evidence">Over 1,000 experiments run at once</td></tr>
+            <tr><th>Netflix</th><td data-label="How technology lowers the denominator">Recommendation models run across the whole catalog</td><td data-label="How marketing gains">Better engagement and lower churn</td><td data-label="Evidence">Netflix's own authors estimate the value above $1B a year, method unspecified; the company says 75% of viewing comes from recommendations</td></tr>
+            <tr><th>Amazon</th><td data-label="How technology lowers the denominator">Retail operations generate first-party purchase data</td><td data-label="How marketing gains">Advertising sells access to shopping intent</td><td data-label="Evidence">Annualized ad revenue exceeded $60B in 2025</td></tr>
+            <tr><th>Starbucks</th><td data-label="How technology lowers the denominator">The Deep Brew AI platform identifies member cohorts</td><td data-label="How marketing gains">Relevant offers drive visits and spend</td><td data-label="Evidence">34.3M active US Rewards members in Q1 2024, up 13%; no measured lift reported</td></tr>
+            <tr><th>Klarna</th><td data-label="How technology lowers the denominator">Generative AI for images and copy</td><td data-label="How marketing gains">More campaigns at lower cost</td><td data-label="Evidence">Agency spend down 25% and image cycles cut from six weeks to seven days; author-reported, with no conversion data</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Progressive is the closest match to Capital One: its own driving data both prices the risk and shapes which customers it keeps. Klarna shows the limit of cost-only AI, since savings alone do not prove the numerator improved.</p>
+    </section>
+
+    <section id="numerator">
+      <h2>What cannot be copied</h2>
+      <p>If AI belongs in the denominator, the numerator has to be <span class="hl">what others cannot copy.</span> Two things qualify: what a brand knows about itself, and the human judgment applied to that knowledge.</p>
+
+      <div class="pair">
+        <div>
+          <h3>What a brand knows about itself</h3>
+          <ul>
+            <li>Why customers actually choose you, in their own words</li>
+            <li>Results of past tests, including the failures</li>
+            <li>Margin by segment, product and channel</li>
+            <li>Sales objections and how they were overcome</li>
+            <li>The voice, standards and promises that define the brand</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Human judgment</h3>
+          <ul>
+            <li>Which questions are worth testing</li>
+            <li>Whether a result reflects long-term value or only a quick click</li>
+            <li>When to scale an offer and when to kill it</li>
+            <li>Where the risk is too high for an agent to act alone</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>Two cautions keep this honest. Cost savings alone do not prove the numerator improved: a company can cut agency spend by a quarter and still have no conversion data to show for it. And proxies mislead. Click-through and engagement may not track retention or margin, so the scorecard should measure outcomes.</p>
+      <p>This is why a shared test register matters. A running record of every test, the decision rule set beforehand, and the result, failures included, turns one-off experiments into knowledge a competitor cannot rent.</p>
+    </section>
+
+    <section id="owner">
+      <h2>The inside owner</h2>
+      <p>Every client needs one person or team inside the company who answers for both marketing and technology. Without that owner, the loop stops when the outside adviser leaves.</p>
+      <p>The Capital One story makes the point. Its founders began as consultants, but the bank that hired them judged the idea too radical for outsiders to carry out. They had to join full time, and they made their acceptance conditional on controlling strategy, marketing and IT, with technologists working beside analysts and marketers under one leader.</p>
+      <p>For firms that work from the outside, the equivalent is an owner on the client side with four responsibilities:</p>
+      <ol>
+        <li><strong>The shared scorecard.</strong> One ratio, such as pipeline value per dollar of cost to serve, that neither marketing nor IT can hide behind.</li>
+        <li><strong>The test register.</strong> Every test logged with its decision rule and result, failures included.</li>
+        <li><strong>The data foundation.</strong> One customer record that marketing, sales and technology all trust.</li>
+        <li><strong>Governance.</strong> Rules for access, review and audit for any AI agent that touches the CRM.</li>
+      </ol>
+      <p>The outside partner designs the loop and trains the team. The inside owner keeps it running.</p>
+    </section>
+
+    <section id="practices">
+      <h2>Seven practices and a pilot checklist</h2>
+      <ol>
+        <li><strong>Build the data foundation before scaling AI.</strong> Data, governance and talent come first. Gartner's 2026 survey finds only 30% of marketing leaders report mature AI readiness.</li>
+        <li><strong>Keep one customer record,</strong> so marketing sees what sales closed and technology sees what marketing promised.</li>
+        <li><strong>Make every campaign a test</strong> with one question, one owner and a decision rule set before launch. Booking.com runs over 1,000 experiments at once and keeps a searchable record of every win and failure.</li>
+        <li><strong>Judge results on outcomes, not proxies.</strong> Track retention and margin, not only clicks. Netflix's own researchers warn that click-through and engagement may not reflect long-term value.</li>
+        <li><strong>Put an independent check around AI agents,</strong> with human review before an agent acts. Capital One's multi-agent assistant for auto dealers includes an evaluator agent that checks every plan against policy before it runs.</li>
+        <li><strong>Treat governance as part of the denominator,</strong> because weak controls set the cost of failure.</li>
+        <li><strong>Write kill criteria and reallocate.</strong> Retire what stops working. Capital One withdrew its famous balance transfer product in 1994 as returns fell, while rivals kept pushing it and some, like Advanta, blew up.</li>
+      </ol>
+      <h3>Run one pilot</h3>
+      <p>Capital One's scale is not a client's scale, so start small with the same discipline.</p>
+      <ul class="check">
+        <li>Baseline one client's ratio: pipeline value over cost and delay per customer won</li>
+        <li>Name the inside owner for both marketing and technology</li>
+        <li>Write one test question, a decision rule and kill criteria before launch</li>
+        <li>Set up a holdout group that does not receive the change</li>
+        <li>Log the result, good or bad, in a shared test register</li>
+        <li>Draft a short governance checklist for any AI agent in the CRM</li>
+      </ul>
+    </section>
+
+    <section id="roundtable">
+      <h2>How this applies to Roundtable</h2>
+      <p>Roundtable's capabilities already match the loop. Each needs one upgrade, and the positioning becomes explicit: marketing is the numerator, technology is the denominator, and we improve both together.</p>
+      <p>The existing results point the same way: 125% more leads and a 42% ROAS improvement for ZMC &amp; Associates, and 3&times; faster follow-up for the sales team of a $300M distributor.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Capability</th><th>Upgrade</th></tr></thead>
+          <tbody>
+            <tr><th>Data: one customer record</th><td data-label="Upgrade">Capture first-party data from every campaign and treat data quality as a denominator metric</td></tr>
+            <tr><th>AI: agents in your tools</th><td data-label="Upgrade">Add an independent evaluation step and human review before an agent acts</td></tr>
+            <tr><th>Testing: evidence before capital</th><td data-label="Upgrade">Keep a register of past tests, failures included, so no client repeats a failed idea</td></tr>
+            <tr><th>Sales: follow-up that holds</th><td data-label="Upgrade">Score leads on what happens after they respond, such as close rate and margin</td></tr>
+            <tr><th>Partnerships: relationships as a channel</th><td data-label="Upgrade">Track referral cohorts over time</td></tr>
+            <tr><th>Measurement: one scorecard</th><td data-label="Upgrade">Report one ratio so neither side can hide behind its own metric</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="care">
+      <h2>A note on the analogy</h2>
+      <p>The link between marketing, technology and Capital One's underwriting is our analogy, not Capital One's own claim. Capital One's scale of 36,000 tests a year is not a client's scale, so pilot smaller with the same discipline. Several figures are company-reported, and Capital One's record after 2000 includes a serious breach and integration that ran slower than announced.</p>
+    </section>
+
+    <section id="sources">
+      <h2>Sources</h2>
+      <ul class="note">
+        <li>Harvard Business School case 9-700-124, "Capital One Financial Corporation" (rev. May 2001). Readers should obtain their own licensed copy.</li>
+        <li>Roundtable Growth Partners, executive summary (updated November 3, 2026), which draws on Capital One announcements (Brex, Discover), VentureBeat on multi-agent workflows, SiliconANGLE on the cloud move, FinTech Futures on the OCC penalty, the Gartner 2026 CMO Spend Survey, and company reporting on Progressive, Booking.com, Netflix, Amazon, Starbucks and Klarna.</li>
+        <li>Figures reported by the companies themselves are labeled as company-reported in the text.</li>
+      </ul>
+    </section>
+
+  </div>
+</main>
+
+<footer class="gutter">
+  <div class="inner">
+    <p><b>Roundtable Growth Partners</b></p>
+    <p>Marketing as Numerator, Technology as Denominator &middot; November 2026</p>
+  </div>
+</footer>
+
+</body></html>
