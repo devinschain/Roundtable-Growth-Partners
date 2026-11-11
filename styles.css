@@ -161,3 +161,33 @@ nav a{font-size:.92rem}
 
 .inv-photo{margin:30px 0 0;border-radius:16px;overflow:hidden;box-shadow:0 6px 32px rgba(36,49,58,.14)}
 .inv-photo img{width:100%;display:block;aspect-ratio:3/2;object-fit:cover}
+
+/* ===== modern touches ===== */
+header.site{transition:box-shadow .3s,background .3s}
+header.site.scrolled{box-shadow:0 8px 28px -14px rgba(20,29,35,.28);background:rgba(242,245,246,.97)}
+#prog{position:absolute;left:0;bottom:-1px;height:3px;width:100%;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,var(--teal),var(--teal-l),var(--amber));z-index:2}
+.g{background:linear-gradient(100deg,#5CC4C8 0%,#A8E6E8 55%,#E3A52B 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+/* hero entrance */
+.hero-inner>*{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.hero-inner>*:nth-child(1){animation-delay:.05s}.hero-inner>*:nth-child(2){animation-delay:.15s}.hero-inner>*:nth-child(3){animation-delay:.3s}.hero-inner>*:nth-child(4){animation-delay:.45s}.hero-inner>*:nth-child(5){animation-delay:.6s}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+/* hero pillars: glass tiles */
+.hero-bg .pillars a{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-top:3px solid var(--teal-l);border-radius:10px;padding:14px 16px;backdrop-filter:blur(6px);transition:transform .3s,background .3s}
+.hero-bg .pillars a:hover{transform:translateY(-4px);background:rgba(255,255,255,.12)}
+/* hover lift */
+.js .card.reveal.in,.js .cs-tcard.reveal.in,.js .offer.reveal.in{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,opacity .7s}
+.js .card.reveal.in:hover,.js .cs-tcard.reveal.in:hover,.js .offer.reveal.in:hover{transform:translateY(-6px);box-shadow:0 26px 44px -24px rgba(23,111,115,.45)}
+.pillar-badge{transition:transform .4s}.pillar:hover .pillar-badge{transform:scale(1.12) rotate(-6deg)}
+.btn{transition:transform .2s,box-shadow .2s,background .2s}.btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px -10px rgba(20,29,35,.45)}
+/* approach steps light up in turn */
+.steps .step{transition:background .5s}
+.steps .step i{transition:color .5s,transform .5s}
+.steps.go .step{animation:stepglow 5.6s ease-in-out .2s 1 both}
+.steps.go .step:nth-child(2){animation-delay:1.2s}.steps.go .step:nth-child(3){animation-delay:2.2s}.steps.go .step:nth-child(4){animation-delay:3.2s}
+@keyframes stepglow{0%{background:transparent}12%,28%{background:rgba(92,196,200,.14)}45%,100%{background:transparent}}
+/* soft drifting glow in dark and CTA bands */
+.dark,.cta-band{position:relative;overflow:hidden}
+.dark::before,.cta-band::before{content:"";position:absolute;width:640px;height:640px;right:-180px;top:-240px;border-radius:50%;background:radial-gradient(circle,rgba(92,196,200,.20),transparent 65%);animation:drift 16s ease-in-out infinite alternate;pointer-events:none}
+.dark>.wrap,.cta-band>.wrap{position:relative;z-index:1}
+@keyframes drift{from{transform:translate(0,0)}to{transform:translate(-90px,70px)}}
+@media(prefers-reduced-motion:reduce){.hero-inner>*,.steps.go .step,.dark::before,.cta-band::before{animation:none!important}.btn,.pillar-badge{transition:none}}
