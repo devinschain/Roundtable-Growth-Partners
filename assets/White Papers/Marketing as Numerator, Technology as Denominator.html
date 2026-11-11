@@ -1,220 +1,316 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Marketing as Numerator, Technology as Denominator</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
-/* Layout concept: a dark Roundtable cover band, then one narrow reading column on cloud. The argument leads (AI makes the denominator a commodity), drawn figures carry it, and Capital One appears as one proof among several. */
+/* Layout concept: a light, glowing hero with the animated ratio card, then a long read with a sticky section guide on the left, big sans headlines, soft cards, and count-up numbers. Roundtable's slate, teal and amber carry the color. */
 :root {
-  --bg: #F2F5F6;
+  --bg: #F6F9FA;
   --paper: #FFFFFF;
-  --ink: #24313A;
+  --ink: #141D23;
   --ink-2: #5B6B75;
-  --line: #DCE3E6;
+  --line: #E1E8EB;
   --accent: #176F73;
   --accent-2: #5CC4C8;
-  --tint: #E6EFF0;
-  --hl-soft: rgba(227, 165, 43, 0.40);
+  --tint: #E9F3F3;
   --hl: #E3A52B;
-  --band: #24313A;
-  --band-ink: #FFFFFF;
-  --band-ink-2: #B9C7CE;
+  --hl-soft: rgba(227, 165, 43, 0.38);
+  --glow-1: rgba(92, 196, 200, 0.38);
+  --glow-2: rgba(227, 165, 43, 0.20);
+  --shadow: 0 1px 2px rgba(20, 29, 35, 0.05), 0 12px 32px -12px rgba(20, 29, 35, 0.14);
   --box-a: #176F73;
   --box-b: #24313A;
   --box-ink: #FFFFFF;
-  --serif: "Spectral", Georgia, "Times New Roman", serif;
+  --display: "Manrope", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #141D23;
-    --paper: #1B2730;
-    --ink: #E8EEF0;
+    --bg: #0E1519;
+    --paper: #172229;
+    --ink: #EAF0F2;
     --ink-2: #9FB0B9;
-    --line: #2D3C46;
+    --line: #25343D;
     --accent: #5CC4C8;
-    --tint: #22323B;
+    --tint: #1B2A32;
     --hl-soft: rgba(227, 165, 43, 0.30);
-    --band: #0F161B;
+    --glow-1: rgba(92, 196, 200, 0.16);
+    --glow-2: rgba(227, 165, 43, 0.09);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px -12px rgba(0, 0, 0, 0.5);
     --box-b: #2E3F4A;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #141D23;
-  --paper: #1B2730;
-  --ink: #E8EEF0;
+  --bg: #0E1519;
+  --paper: #172229;
+  --ink: #EAF0F2;
   --ink-2: #9FB0B9;
-  --line: #2D3C46;
+  --line: #25343D;
   --accent: #5CC4C8;
-  --tint: #22323B;
+  --tint: #1B2A32;
   --hl-soft: rgba(227, 165, 43, 0.30);
-  --band: #0F161B;
+  --glow-1: rgba(92, 196, 200, 0.16);
+  --glow-2: rgba(227, 165, 43, 0.09);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px -12px rgba(0, 0, 0, 0.5);
   --box-b: #2E3F4A;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--sans);
   font-size: 17px;
-  line-height: 1.65;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
-.gutter {
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-.inner { max-width: 760px; margin: 0 auto; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1160px; margin: 0 auto; }
 
-/* Cover */
-.cover { background: var(--band); color: var(--band-ink); padding-block: 28px 56px; }
-.cover .logo { height: 44px; width: auto; display: block; }
-.cover .eyebrow { margin: 56px 0 14px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-2); }
-.cover h1 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: clamp(2rem, 5.4vw, 3.3rem); line-height: 1.1; text-wrap: balance; }
-.cover .lede { margin: 20px 0 0; max-width: 32em; font-size: 1.2rem; line-height: 1.5; color: var(--band-ink-2); }
-.cover .meta { margin: 32px 0 0; font-size: 0.88rem; color: var(--band-ink-2); }
-.cover .meta b { color: var(--band-ink); font-weight: 600; }
+/* Top bar */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: saturate(140%) blur(14px); -webkit-backdrop-filter: saturate(140%) blur(14px); border-bottom: 1px solid var(--line); }
+.top .row { height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { height: 32px; width: auto; display: block; color: var(--ink); }
+.lg-dot, .lg-sub { fill: var(--accent); }
+.pill { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); background: var(--tint); padding: 7px 13px; border-radius: 999px; white-space: nowrap; }
+#prog { position: absolute; left: 0; bottom: -1px; height: 3px; width: 100%; transform-origin: left; transform: scaleX(0); background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
 
-/* Reading column */
-main { padding-block: 24px 64px; }
-section { padding-top: 52px; }
-h2 { margin: 0 0 16px; font-family: var(--serif); font-weight: 600; font-size: clamp(1.45rem, 3.4vw, 1.85rem); line-height: 1.2; text-wrap: balance; color: var(--ink); }
-h3 { margin: 28px 0 8px; font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: var(--ink); }
-p { margin: 0 0 16px; }
-ul, ol { margin: 0 0 16px; padding-left: 1.3em; }
+/* Hero */
+.hero-wrap { position: relative; overflow: hidden; background: radial-gradient(900px 480px at 88% -20%, var(--glow-1), transparent 62%), radial-gradient(700px 420px at -8% 120%, var(--glow-2), transparent 60%), var(--bg); }
+.hero-wrap::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(color-mix(in srgb, var(--ink) 16%, transparent) 1px, transparent 1.3px); background-size: 24px 24px; -webkit-mask-image: linear-gradient(to bottom, #000 0, transparent 85%); mask-image: linear-gradient(to bottom, #000 0, transparent 85%); opacity: 0.45; pointer-events: none; }
+.hero { position: relative; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center; padding-block: 56px 72px; }
+.hero-copy { min-width: 0; }
+h1 { margin: 18px 0 20px; font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 5.6vw, 4.2rem); line-height: 1.04; letter-spacing: -0.035em; text-wrap: balance; }
+.g { background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.u { text-decoration: underline; text-decoration-color: var(--hl); text-decoration-thickness: 0.09em; text-underline-offset: 0.14em; }
+.lede { margin: 0; max-width: 29em; font-size: clamp(1.1rem, 2vw, 1.32rem); line-height: 1.5; color: var(--ink-2); }
+.cta-row { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 24px; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 999px; background: var(--ink); color: var(--bg); font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -8px rgba(20, 29, 35, 0.4); }
+.by { font-size: 0.86rem; color: var(--ink-2); }
+.by b { color: var(--ink); font-weight: 600; }
+
+/* Animated ratio card (always dark) */
+.meter { min-width: 0; padding: 28px 28px 22px; color: #fff; background: linear-gradient(165deg, #2B3A44, #141D23); border-radius: 24px; box-shadow: 0 34px 60px -24px rgba(20, 29, 35, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.07) inset; }
+.m-title { margin: 0 0 18px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #5CC4C8; }
+.m-label { margin: 0 0 8px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; }
+.m-label span { margin-left: 8px; font-weight: 500; letter-spacing: 0.04em; text-transform: none; color: #B9C7CE; }
+.m-track { height: 14px; background: rgba(255, 255, 255, 0.12); border-radius: 8px; overflow: hidden; }
+.m-bar { height: 100%; border-radius: 8px; }
+.m-num { width: 92.3%; background: linear-gradient(90deg, #176F73, #5CC4C8); }
+.m-den { width: 61.5%; background: rgba(255, 255, 255, 0.88); }
+.m-line { height: 2px; margin: 18px 0; background: rgba(255, 255, 255, 0.45); }
+.m-out { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; margin-top: 24px; }
+.m-big { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 7vw, 4rem); line-height: 1; letter-spacing: -0.03em; color: #E3A52B; font-variant-numeric: tabular-nums; }
+.m-cap { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #B9C7CE; }
+.m-note { margin: 14px 0 0; font-size: 0.8rem; color: #B9C7CE; }
+
+/* Page grid with sticky guide */
+.page { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 64px; padding-block: 8px 96px; }
+.toc { position: sticky; top: calc(84px + env(safe-area-inset-top, 0px)); align-self: start; padding-top: 52px; }
+.toc p { margin: 0 0 10px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2); }
+.toc a { display: block; padding: 7px 0 7px 14px; font-size: 0.88rem; line-height: 1.35; color: var(--ink-2); text-decoration: none; border-left: 2px solid var(--line); transition: color 0.2s, border-color 0.2s; }
+.toc a:hover { color: var(--ink); }
+.toc a.on { color: var(--ink); font-weight: 600; border-left-color: var(--accent); }
+.col { min-width: 0; max-width: 740px; }
+.sec { padding-top: 84px; }
+.sec:first-child { padding-top: 48px; }
+.kicker { margin: 0 0 10px; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+h2 { margin: 0 0 22px; font-family: var(--display); font-weight: 800; font-size: clamp(1.8rem, 3.8vw, 2.55rem); line-height: 1.1; letter-spacing: -0.028em; text-wrap: balance; }
+h3 { margin: 34px 0 8px; font-family: var(--display); font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; }
+p { margin: 0 0 18px; }
+ul { margin: 0 0 18px; padding-left: 1.25em; }
 li { margin-bottom: 8px; }
 li::marker { color: var(--accent); }
 strong { font-weight: 600; }
-.hl { background: linear-gradient(transparent 55%, var(--hl-soft) 55%); padding: 0 2px; }
+.hl { background: linear-gradient(transparent 58%, var(--hl-soft) 58%); padding: 0 2px; }
 .note { font-size: 0.88rem; color: var(--ink-2); }
-.big { font-family: var(--serif); font-weight: 500; font-size: clamp(1.3rem, 3.4vw, 1.6rem); line-height: 1.35; text-wrap: balance; margin: 8px 0 20px; }
+
+/* Statement card */
+.statement { margin: 30px 0; padding: 34px clamp(22px, 4vw, 42px); border-radius: 24px; color: #fff; background: linear-gradient(135deg, #176F73, #0E4A4D); box-shadow: 0 26px 48px -26px rgba(23, 111, 115, 0.6); }
+.statement p { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.35rem, 3vw, 1.95rem); line-height: 1.28; letter-spacing: -0.018em; text-wrap: balance; }
+.statement em { font-style: normal; color: #F2BE55; }
 
 /* Stat tiles */
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 20px 0; }
-.stat { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; }
-.stat b { display: block; font-family: var(--serif); font-weight: 600; font-size: 2.3rem; line-height: 1.1; color: var(--accent); }
-.stat span { display: block; margin-top: 6px; font-size: 0.88rem; line-height: 1.4; color: var(--ink-2); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin: 24px 0; }
+.stat { padding: 22px 22px 20px; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); transition: transform 0.25s; }
+.stat:hover { transform: translateY(-3px); }
+.stat b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 5vw, 3rem); line-height: 1.05; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; background: linear-gradient(100deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.stat span { display: block; margin-top: 8px; font-size: 0.9rem; line-height: 1.45; color: var(--ink-2); }
 
 /* Formula */
-.formula { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 20px; margin: 24px 0; padding: 22px 24px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
-.formula .lhs { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; }
-.formula .eq { font-family: var(--serif); font-size: 1.4rem; color: var(--ink-2); }
+.formula { display: flex; align-items: center; flex-wrap: wrap; gap: 18px 24px; margin: 26px 0; padding: 26px clamp(20px, 4vw, 32px); background: var(--paper); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); }
+.formula .lhs { font-family: var(--display); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; }
+.formula .eq { font-family: var(--display); font-size: 1.6rem; color: var(--ink-2); }
 .frac { display: flex; flex-direction: column; align-items: stretch; min-width: 0; flex: 1 1 240px; text-align: center; }
-.frac .top { padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
-.frac .bot { padding-top: 8px; }
+.frac .top-part { padding-bottom: 10px; border-bottom: 3px solid var(--ink); }
+.frac .bot { padding-top: 10px; }
 .frac small { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-.frac span { font-size: 0.98rem; line-height: 1.4; }
+.frac span { font-size: 1rem; line-height: 1.4; }
 
 /* Figures and charts */
-.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px; margin: 24px 0; }
-.fig { margin: 0; padding: 16px 16px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
-.fig.narrow { max-width: 440px; margin: 24px auto; }
-.fig.mid { max-width: 540px; margin: 24px auto; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px; margin: 26px 0; }
+.fig { margin: 0; padding: 22px 20px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); }
+.fig.narrow { max-width: 460px; margin: 26px auto; }
+.fig.mid { max-width: 560px; margin: 26px auto; }
 .fig svg { display: block; width: 100%; height: auto; max-width: 100%; }
-.fig figcaption { margin-top: 8px; font-size: 0.86rem; color: var(--ink-2); line-height: 1.5; }
-.ct { margin: 0 0 2px; font-family: var(--serif); font-weight: 600; font-size: 1.05rem; line-height: 1.3; color: var(--ink); }
+.fig figcaption { margin-top: 10px; font-size: 0.86rem; color: var(--ink-2); line-height: 1.5; }
+.ct { margin: 0 0 2px; font-family: var(--display); font-weight: 700; font-size: 1.08rem; letter-spacing: -0.01em; line-height: 1.3; color: var(--ink); }
 .cs { margin: 0 0 12px; font-size: 0.8rem; color: var(--ink-2); line-height: 1.4; }
-.s-box-a { fill: var(--box-a); }
-.s-box-b { fill: var(--box-b); }
-.s-ink { fill: var(--box-ink); font-family: var(--sans); }
-.s-cap { font-size: 10.5px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; }
-.s-body { font-size: 13.5px; font-weight: 500; }
-.s-bar { stroke: var(--ink); stroke-width: 2.5; fill: none; }
-.s-ring { stroke: var(--line); stroke-width: 2; fill: none; }
-.s-arc { stroke: var(--accent); stroke-width: 2.5; fill: none; }
-.s-head { fill: var(--accent); }
-.s-label { fill: var(--ink-2); font-family: var(--sans); font-size: 13px; }
 .c-base { stroke: var(--ink-2); stroke-width: 1.5; fill: none; }
 .c-grid { stroke: var(--line); stroke-width: 1.5; fill: none; }
 .c-val { fill: var(--ink); font-family: var(--sans); font-size: 13px; font-weight: 600; }
 .c-cat { fill: var(--ink); font-family: var(--sans); font-size: 12.5px; }
 .c-sub { fill: var(--ink-2); font-family: var(--sans); font-size: 11.5px; }
-.b-mute { fill: color-mix(in srgb, var(--ink-2) 40%, var(--paper)); }
+.b-mute { fill: color-mix(in srgb, var(--ink-2) 38%, var(--paper)); }
 .b-a { fill: var(--box-a); }
 .b-b { fill: var(--box-b); }
 .b-focus { fill: var(--accent); }
 .b-hl { fill: var(--hl); }
 .q-lo { fill: var(--paper); stroke: var(--line); stroke-width: 1.5; }
 .q-mid { fill: var(--tint); stroke: var(--line); stroke-width: 1.5; }
-.q-hi { fill: color-mix(in srgb, var(--accent) 18%, var(--paper)); stroke: var(--line); stroke-width: 1.5; }
+.q-hi { fill: color-mix(in srgb, var(--accent) 20%, var(--paper)); stroke: var(--line); stroke-width: 1.5; }
 .q-title { fill: var(--ink); font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: 0.9px; }
 .q-desc { fill: var(--ink-2); font-family: var(--sans); font-size: 11.5px; }
 .dot { fill: var(--accent); stroke: var(--paper); stroke-width: 2.5; }
 .dot-warn { fill: var(--hl); stroke: var(--paper); stroke-width: 2.5; }
 
 /* Tables */
-.tablewrap { margin: 20px 0 8px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; }
+.tablewrap { margin: 22px 0 10px; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 0.94rem; line-height: 1.5; }
-th, td { padding: 12px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); min-width: 0; }
-thead th { background: var(--tint); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+th, td { padding: 14px 18px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); min-width: 0; }
+thead th { background: var(--tint); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+tbody tr { transition: background 0.2s; }
+tbody tr:hover { background: color-mix(in srgb, var(--tint) 55%, transparent); }
 tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
-tbody th { font-weight: 600; color: var(--ink); width: 18%; }
+tbody th { font-family: var(--display); font-weight: 700; color: var(--ink); width: 18%; }
 
-/* Two-column lists */
-.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 20px 0; }
-.pair > div { padding: 20px 22px 8px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+/* Lists */
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 22px 0; }
+.pair > div { padding: 22px 24px 8px; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); }
 .pair h3 { margin-top: 0; }
-
-/* Checklist */
+ol.steps { list-style: none; padding-left: 0; counter-reset: s; }
+ol.steps li { counter-increment: s; position: relative; padding-left: 50px; margin-bottom: 16px; }
+ol.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--tint); color: var(--accent); font-family: var(--display); font-weight: 800; font-size: 0.95rem; }
 ul.check { list-style: none; padding-left: 0; }
-ul.check li { position: relative; padding-left: 32px; }
-ul.check li::before { content: ""; position: absolute; left: 0; top: 0.28em; width: 18px; height: 18px; border: 2px solid var(--accent); border-radius: 4px; }
+ul.check li { position: relative; padding-left: 34px; }
+ul.check li::before { content: ""; position: absolute; left: 0; top: 0.3em; width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 6px; }
 
 /* Pull quote */
-blockquote.quote { margin: 28px 0; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-blockquote.quote p { margin: 0 0 10px; font-family: var(--serif); font-weight: 500; font-size: clamp(1.35rem, 3.6vw, 1.75rem); line-height: 1.3; color: var(--ink); text-wrap: balance; }
-blockquote.quote cite { font-style: normal; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+blockquote.quote { margin: 30px 0; padding: 0; }
+blockquote.quote::before { content: "\201C"; display: block; font-family: var(--display); font-weight: 800; font-size: 5rem; line-height: 0.6; color: var(--accent-2); }
+blockquote.quote p { margin: 0 0 12px; font-family: var(--display); font-weight: 700; font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.2; letter-spacing: -0.025em; color: var(--ink); text-wrap: balance; }
+blockquote.quote cite { font-style: normal; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
 
 /* Footer */
-footer { background: var(--band); color: var(--band-ink-2); padding-block: 32px; font-size: 0.86rem; }
-footer b { color: var(--band-ink); font-family: var(--serif); font-size: 1.05rem; font-weight: 600; }
-footer p { margin: 0 0 6px; }
+footer { padding-block: 36px 44px; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 0.86rem; }
+footer .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
+footer .logo { height: 28px; }
 
-:focus-visible { outline: 3px solid #E3A52B; outline-offset: 2px; }
+:focus-visible { outline: 3px solid #E3A52B; outline-offset: 3px; }
 
+@media (max-width: 1020px) {
+  .page { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .toc { display: none; }
+  .col { max-width: 760px; margin: 0 auto; width: 100%; }
+}
+@media (max-width: 820px) {
+  .hero { grid-template-columns: 1fr; gap: 36px; padding-block: 36px 48px; }
+  .pill { display: none; }
+}
 /* Tables fold into stacked rows on phones */
 @media (max-width: 640px) {
   body { font-size: 16px; }
-  .tablewrap { background: transparent; border: 0; overflow: visible; }
+  .sec { padding-top: 64px; }
+  .tablewrap { background: transparent; border: 0; box-shadow: none; overflow: visible; }
   table, thead, tbody, tr, th, td { display: block; width: 100%; }
   thead { position: absolute; left: -9999px; }
-  tbody tr { margin-bottom: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 6px 0; }
-  th, td { border-bottom: 0; padding: 8px 16px; }
-  tbody th { width: 100%; font-family: var(--serif); font-size: 1.05rem; padding-bottom: 2px; }
+  tbody tr { margin-bottom: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 8px 0; }
+  th, td { border-bottom: 0; padding: 8px 18px; }
+  tbody th { width: 100%; font-size: 1.05rem; padding-bottom: 2px; }
   td[data-label]::before { content: attr(data-label); display: block; margin-bottom: 2px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
-  .cover .eyebrow { margin-top: 40px; }
+}
+@media print {
+  .top, .toc, #prog, .btn { display: none; }
+  body::before { display: none; }
+  .page { display: block; }
+  .hero-wrap { background: none; }
+  .hero-wrap::before { display: none; }
+  * { animation: none !important; transition: none !important; }
+  .fig, .stat, .tablewrap, .pair > div, .formula { box-shadow: none; break-inside: avoid; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn, .stat { transition: none; }
 }
 </style>
 
-<header class="cover gutter">
-  <div class="inner">
+<div class="top gutter">
+  <div class="wrap row">
     <svg class="logo" viewBox="0 0 330 100" role="img" aria-label="Roundtable Growth Partners" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="44" fill="none" stroke="#FFFFFF" stroke-width="3.5"/>
-      <circle cx="50" cy="6" r="5.5" fill="#5CC4C8"/>
-      <text x="50" y="61.5" text-anchor="middle" font-family="Spectral,Georgia,serif" font-size="32" font-weight="700" fill="#FFFFFF" letter-spacing=".5">RGP</text>
-      <text x="112" y="52" font-family="Spectral,Georgia,serif" font-size="34" font-weight="700" fill="#FFFFFF">Roundtable</text>
-      <text x="113" y="76" font-family="Inter,system-ui,Arial,sans-serif" font-size="13.5" letter-spacing="4.2" font-weight="600" fill="#5CC4C8">GROWTH PARTNERS</text>
+      <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="3.5"/>
+      <circle class="lg-dot" cx="50" cy="6" r="5.5"/>
+      <text x="50" y="61" text-anchor="middle" font-family="Manrope,Inter,sans-serif" font-size="30" font-weight="800" fill="currentColor" letter-spacing=".5">RGP</text>
+      <text x="112" y="52" font-family="Manrope,Inter,sans-serif" font-size="33" font-weight="800" fill="currentColor">Roundtable</text>
+      <text class="lg-sub" x="113" y="76" font-family="Inter,system-ui,Arial,sans-serif" font-size="13.5" letter-spacing="4.2" font-weight="600">GROWTH PARTNERS</text>
     </svg>
-    <p class="eyebrow">White paper</p>
-    <h1>Marketing as Numerator, Technology as Denominator</h1>
-    <p class="lede">Every company can now buy the same AI. Growth will go to the ones that know something the others don't.</p>
-    <p class="meta"><b>Roundtable Growth Partners</b> &nbsp;&middot;&nbsp; November 2026</p>
+    <span class="pill">White paper</span>
   </div>
-</header>
+  <div id="prog" aria-hidden="true"></div>
+</div>
 
-<main class="gutter">
-  <div class="inner">
+<div class="hero-wrap gutter">
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <span class="pill">White paper &middot; November 2026</span>
+      <h1>Marketing as <span class="g">Numerator</span>, Technology as <span class="u">Denominator</span></h1>
+      <p class="lede">Every company can now buy the same AI. Growth will go to the ones that know something the others don't.</p>
+      <div class="cta-row">
+        <a class="btn" href="#question">Start reading <span aria-hidden="true">&#8595;</span></a>
+        <span class="by"><b>Roundtable Growth Partners</b></span>
+      </div>
+    </div>
+    <div class="meter" role="img" aria-label="Animated illustration. Marketing grows 20 percent and technology cost falls 20 percent, lifting growth efficiency from 1.00 to 1.50 times.">
+      <p class="m-title">Growth efficiency</p>
+      <p class="m-label">Marketing <span>numerator</span></p>
+      <div class="m-track"><div class="m-bar m-num" id="barN"></div></div>
+      <div class="m-line"></div>
+      <p class="m-label">Technology <span>denominator</span></p>
+      <div class="m-track"><div class="m-bar m-den" id="barD"></div></div>
+      <div class="m-out"><span class="m-big" id="ratio">1.50&times;</span><span class="m-cap">the ratio</span></div>
+      <p class="m-note">Illustrative: marketing +20%, technology cost &#8722;20%</p>
+    </div>
+  </div>
+</div>
 
-    <section id="question" style="padding-top: 40px;">
+<div class="page gutter wrap">
+  <nav class="toc" aria-label="Sections">
+    <p>In this paper</p>
+    <a href="#question">The question</a>
+    <a href="#thesis">The thesis</a>
+    <a href="#winners">Who wins</a>
+    <a href="#capital-one">The 1990s proof</a>
+    <a href="#audit">Score your ratio</a>
+    <a href="#owner">The inside owner</a>
+    <a href="#practices">Rules and pilot</a>
+    <a href="#roundtable">Roundtable</a>
+  </nav>
+
+  <main class="col">
+
+    <section class="sec" id="question">
+      <p class="kicker">The question</p>
       <h2>We are spending on AI. Where is the growth?</h2>
-      <p>Every leadership team is asking this question. The spending is real: Gartner's 2026 survey finds CMOs now put an average of 15.3% of marketing budgets into AI. The readiness is not: only 30% say they are mature.</p>
+      <p>Every leadership team is asking this. The spending is real: Gartner's 2026 survey finds CMOs now put an average of 15.3% of marketing budgets into AI. The readiness is not: only 30% say they are mature.</p>
 
       <div class="stats">
-        <div class="stat"><b>15.3%</b><span>of marketing budgets now go to AI, on average</span></div>
-        <div class="stat"><b>30%</b><span>of CMOs report mature AI readiness</span></div>
+        <div class="stat"><b data-to="15.3" data-dec="1" data-suf="%">15.3%</b><span>of marketing budgets now go to AI, on average</span></div>
+        <div class="stat"><b data-to="30" data-suf="%">30%</b><span>of CMOs report mature AI readiness</span></div>
       </div>
 
       <p>Most teams use AI to do the same work cheaper. Cheaper is something every competitor can buy on the same day. To see why that matters, write growth as a ratio.</p>
@@ -223,15 +319,18 @@ footer p { margin: 0 0 6px; }
         <span class="lhs">Growth efficiency</span>
         <span class="eq">=</span>
         <div class="frac">
-          <div class="top"><small>Marketing</small><span>customers won &times; value per customer</span></div>
+          <div class="top-part"><small>Marketing</small><span>customers won &times; value per customer</span></div>
           <div class="bot"><small>Technology and IT</small><span>cost, risk and delay per customer</span></div>
         </div>
       </div>
 
-      <p class="big">AI is collapsing the bottom of that fraction for everyone at once. That leaves one place to build an advantage: the top.</p>
+      <div class="statement">
+        <p>AI is collapsing the bottom of that fraction for everyone at once. That leaves one place to build an advantage: <em>the top.</em></p>
+      </div>
     </section>
 
-    <section id="thesis">
+    <section class="sec" id="thesis">
+      <p class="kicker">The thesis</p>
       <h2>The denominator is becoming a commodity</h2>
       <p>AI cuts the cost per decision, per asset and per follow-up, and it keeps getting better and cheaper for every company. That is what happens when a denominator matures. It stops being a differentiator and becomes table stakes.</p>
       <p>Klarna is a clean example. It used generative AI for images and copy, cut agency spend by 25%, and shortened image cycles from six weeks to seven days. Those are real savings, and the company reported them without any conversion data alongside. Any competitor can run the same playbook next quarter.</p>
@@ -265,10 +364,10 @@ footer p { margin: 0 0 6px; }
         <p class="cs">Illustrative growth efficiency, today = 1.00</p>
         <svg viewBox="0 0 380 240" role="img" aria-label="Bar chart. Today 1.00. Marketing up 20 percent alone 1.20. Technology cost down 20 percent alone 1.25. Both together 1.50.">
           <line class="c-grid" x1="20" y1="90" x2="360" y2="90" stroke-dasharray="4 4"/>
-          <rect class="b-mute" x="34" y="90" width="60" height="100" rx="3"/>
-          <rect class="b-a" x="119" y="70" width="60" height="120" rx="3"/>
-          <rect class="b-b" x="204" y="65" width="60" height="125" rx="3"/>
-          <rect class="b-hl" x="289" y="40" width="60" height="150" rx="3"/>
+          <rect class="b-mute" x="34" y="90" width="60" height="100" rx="6"/>
+          <rect class="b-a" x="119" y="70" width="60" height="120" rx="6"/>
+          <rect class="b-b" x="204" y="65" width="60" height="125" rx="6"/>
+          <rect class="b-hl" x="289" y="40" width="60" height="150" rx="6"/>
           <line class="c-base" x1="20" y1="190" x2="360" y2="190"/>
           <text class="c-val" x="64" y="82" text-anchor="middle">1.00&#215;</text>
           <text class="c-val" x="149" y="62" text-anchor="middle">1.20&#215;</text>
@@ -288,7 +387,8 @@ footer p { margin: 0 0 6px; }
       <p>One caution keeps this honest. Judge the numerator on outcomes. Netflix's own researchers warn that click-through and engagement may not reflect long-term value, so track retention and margin, not only clicks.</p>
     </section>
 
-    <section id="winners">
+    <section class="sec" id="winners">
+      <p class="kicker">The evidence</p>
       <h2>Who wins: the companies that own their numerator</h2>
       <p>The pattern shows up wherever marketing runs on a system that learns. Each company below owns something competitors cannot rent, then uses technology to learn from it faster.</p>
 
@@ -296,10 +396,10 @@ footer p { margin: 0 0 6px; }
         <p class="ct">Where the edge sits</p>
         <p class="cs">Our reading of each company, not a measurement</p>
         <svg viewBox="0 0 420 340" role="img" aria-label="Two by two map. Horizontal axis: how much a company owns that others cannot copy. Vertical axis: how much it uses AI to cut cost and delay. Klarna sits top left, cheaper but copyable. Progressive, Capital One and Booking.com sit top right, compounding.">
-          <rect class="q-mid" x="56" y="16" width="170" height="145"/>
-          <rect class="q-hi" x="226" y="16" width="170" height="145"/>
-          <rect class="q-lo" x="56" y="161" width="170" height="145"/>
-          <rect class="q-mid" x="226" y="161" width="170" height="145"/>
+          <rect class="q-mid" x="56" y="16" width="170" height="145" rx="10"/>
+          <rect class="q-hi" x="226" y="16" width="170" height="145" rx="10"/>
+          <rect class="q-lo" x="56" y="161" width="170" height="145" rx="10"/>
+          <rect class="q-mid" x="226" y="161" width="170" height="145" rx="10"/>
 
           <text class="q-title" x="66" y="38">CHEAPER, COPYABLE</text>
           <text class="q-desc" x="66" y="54">AI savings anyone can buy</text>
@@ -341,8 +441,9 @@ footer p { margin: 0 0 6px; }
       <p>Progressive is the closest match to the 1990s story that follows: its own driving data both prices the risk and shapes which customers it keeps.</p>
     </section>
 
-    <section id="capital-one">
-      <h2>The 1990s version ran with no AI at all</h2>
+    <section class="sec" id="capital-one">
+      <p class="kicker">The 1990s proof</p>
+      <h2>The same loop ran with no AI at all</h2>
       <p>None of this is new. Capital One ran the same loop thirty years ago, and its results show what a learning loop is worth. Its founders put the idea in one line.</p>
       <blockquote class="quote">
         <p>Credit cards aren't banking, they're information.</p>
@@ -350,9 +451,9 @@ footer p { margin: 0 0 6px; }
       </blockquote>
 
       <div class="stats">
-        <div class="stat"><b>36,000</b><span>tests run in 1999 alone</span></div>
-        <div class="stat"><b>55%+</b><span>of the $750M marketing budget went to products under six months old</span></div>
-        <div class="stat"><b>1,000%+</b><span>stock gain from the 1994 IPO to 2000, against just under 300% for the S&amp;P 500</span></div>
+        <div class="stat"><b data-to="36000">36,000</b><span>tests run in 1999 alone</span></div>
+        <div class="stat"><b data-to="55" data-suf="%+">55%+</b><span>of the $750M marketing budget went to products under six months old</span></div>
+        <div class="stat"><b data-to="1000" data-suf="%+">1,000%+</b><span>stock gain from the 1994 IPO to 2000, against just under 300% for the S&amp;P 500</span></div>
       </div>
 
       <div class="figs">
@@ -362,13 +463,13 @@ footer p { margin: 0 0 6px; }
           <svg viewBox="0 0 380 215" role="img" aria-label="Horizontal bar chart. Standard campaign 155 dollars at 0.5 percent response. Teaser 168 dollars at 1.5 percent. Co-brand 110 dollars at 1.5 percent. Underserved customers 47 dollars at 3.0 percent.">
             <line class="c-base" x1="130" y1="8" x2="130" y2="205"/>
             <text class="c-cat" x="122" y="30" text-anchor="end">Standard</text><text class="c-sub" x="122" y="46" text-anchor="end">0.5% response</text>
-            <rect class="b-mute" x="130" y="22" width="184.5" height="26" rx="2"/><text class="c-val" x="320" y="40">$155</text>
+            <rect class="b-mute" x="130" y="22" width="184.5" height="26" rx="5"/><text class="c-val" x="320" y="40">$155</text>
             <text class="c-cat" x="122" y="80" text-anchor="end">Teaser</text><text class="c-sub" x="122" y="96" text-anchor="end">1.5% response</text>
-            <rect class="b-mute" x="130" y="72" width="200" height="26" rx="2"/><text class="c-val" x="336" y="90">$168</text>
+            <rect class="b-mute" x="130" y="72" width="200" height="26" rx="5"/><text class="c-val" x="336" y="90">$168</text>
             <text class="c-cat" x="122" y="130" text-anchor="end">Co-brand</text><text class="c-sub" x="122" y="146" text-anchor="end">1.5% response</text>
-            <rect class="b-mute" x="130" y="122" width="131" height="26" rx="2"/><text class="c-val" x="267" y="140">$110</text>
+            <rect class="b-mute" x="130" y="122" width="131" height="26" rx="5"/><text class="c-val" x="267" y="140">$110</text>
             <text class="c-cat" x="122" y="180" text-anchor="end">Underserved</text><text class="c-sub" x="122" y="196" text-anchor="end">3.0% response</text>
-            <rect class="b-focus" x="130" y="172" width="56" height="26" rx="2"/><text class="c-val" x="192" y="190">$47</text>
+            <rect class="b-focus" x="130" y="172" width="56" height="26" rx="5"/><text class="c-val" x="192" y="190">$47</text>
           </svg>
           <figcaption>Better targeting lowered the cost of each customer, so the numerator improved the denominator. Source: Credit Card Industry Picture Book (PaineWebber, May 1999), as cited in the case.</figcaption>
         </figure>
@@ -378,18 +479,18 @@ footer p { margin: 0 0 6px; }
           <p class="cs">Percent of balances, Q1 2000. Lower is better. * estimate</p>
           <svg viewBox="0 0 380 290" role="img" aria-label="Horizontal bar chart of charge-off rates. Capital One 3.87 percent is lowest, rising to Metris at 9.80 percent.">
             <line class="c-base" x1="116" y1="4" x2="116" y2="284"/>
-            <text class="c-cat" x="108" y="25" text-anchor="end">Capital One</text><rect class="b-focus" x="116" y="12" width="79.4" height="16" rx="2"/><text class="c-val" x="201" y="25">3.87%</text>
-            <text class="c-cat" x="108" y="48" text-anchor="end">MBNA</text><rect class="b-mute" x="116" y="35" width="83.2" height="16" rx="2"/><text class="c-val" x="205" y="48">4.06%</text>
-            <text class="c-cat" x="108" y="71" text-anchor="end">Citigroup</text><rect class="b-mute" x="116" y="58" width="89.2" height="16" rx="2"/><text class="c-val" x="211" y="71">4.35%</text>
-            <text class="c-cat" x="108" y="94" text-anchor="end">AmEx*</text><rect class="b-mute" x="116" y="81" width="92.3" height="16" rx="2"/><text class="c-val" x="214" y="94">4.50%</text>
-            <text class="c-cat" x="108" y="117" text-anchor="end">Discover</text><rect class="b-mute" x="116" y="104" width="95.5" height="16" rx="2"/><text class="c-val" x="217" y="117">4.66%</text>
-            <text class="c-cat" x="108" y="140" text-anchor="end">Chase</text><rect class="b-mute" x="116" y="127" width="110.9" height="16" rx="2"/><text class="c-val" x="233" y="140">5.41%</text>
-            <text class="c-cat" x="108" y="163" text-anchor="end">BankAmerica</text><rect class="b-mute" x="116" y="150" width="111.3" height="16" rx="2"/><text class="c-val" x="233" y="163">5.43%</text>
-            <text class="c-cat" x="108" y="186" text-anchor="end">Household</text><rect class="b-mute" x="116" y="173" width="116.6" height="16" rx="2"/><text class="c-val" x="238" y="186">5.69%</text>
-            <text class="c-cat" x="108" y="209" text-anchor="end">Bank One</text><rect class="b-mute" x="116" y="196" width="118.5" height="16" rx="2"/><text class="c-val" x="240" y="209">5.78%</text>
-            <text class="c-cat" x="108" y="232" text-anchor="end">Fleet</text><rect class="b-mute" x="116" y="219" width="125.3" height="16" rx="2"/><text class="c-val" x="247" y="232">6.11%</text>
-            <text class="c-cat" x="108" y="255" text-anchor="end">Providian*</text><rect class="b-mute" x="116" y="242" width="139" height="16" rx="2"/><text class="c-val" x="261" y="255">6.78%</text>
-            <text class="c-cat" x="108" y="278" text-anchor="end">Metris</text><rect class="b-mute" x="116" y="265" width="200.9" height="16" rx="2"/><text class="c-val" x="323" y="278">9.80%</text>
+            <text class="c-cat" x="108" y="25" text-anchor="end">Capital One</text><rect class="b-focus" x="116" y="12" width="79.4" height="16" rx="4"/><text class="c-val" x="201" y="25">3.87%</text>
+            <text class="c-cat" x="108" y="48" text-anchor="end">MBNA</text><rect class="b-mute" x="116" y="35" width="83.2" height="16" rx="4"/><text class="c-val" x="205" y="48">4.06%</text>
+            <text class="c-cat" x="108" y="71" text-anchor="end">Citigroup</text><rect class="b-mute" x="116" y="58" width="89.2" height="16" rx="4"/><text class="c-val" x="211" y="71">4.35%</text>
+            <text class="c-cat" x="108" y="94" text-anchor="end">AmEx*</text><rect class="b-mute" x="116" y="81" width="92.3" height="16" rx="4"/><text class="c-val" x="214" y="94">4.50%</text>
+            <text class="c-cat" x="108" y="117" text-anchor="end">Discover</text><rect class="b-mute" x="116" y="104" width="95.5" height="16" rx="4"/><text class="c-val" x="217" y="117">4.66%</text>
+            <text class="c-cat" x="108" y="140" text-anchor="end">Chase</text><rect class="b-mute" x="116" y="127" width="110.9" height="16" rx="4"/><text class="c-val" x="233" y="140">5.41%</text>
+            <text class="c-cat" x="108" y="163" text-anchor="end">BankAmerica</text><rect class="b-mute" x="116" y="150" width="111.3" height="16" rx="4"/><text class="c-val" x="233" y="163">5.43%</text>
+            <text class="c-cat" x="108" y="186" text-anchor="end">Household</text><rect class="b-mute" x="116" y="173" width="116.6" height="16" rx="4"/><text class="c-val" x="238" y="186">5.69%</text>
+            <text class="c-cat" x="108" y="209" text-anchor="end">Bank One</text><rect class="b-mute" x="116" y="196" width="118.5" height="16" rx="4"/><text class="c-val" x="240" y="209">5.78%</text>
+            <text class="c-cat" x="108" y="232" text-anchor="end">Fleet</text><rect class="b-mute" x="116" y="219" width="125.3" height="16" rx="4"/><text class="c-val" x="247" y="232">6.11%</text>
+            <text class="c-cat" x="108" y="255" text-anchor="end">Providian*</text><rect class="b-mute" x="116" y="242" width="139" height="16" rx="4"/><text class="c-val" x="261" y="255">6.78%</text>
+            <text class="c-cat" x="108" y="278" text-anchor="end">Metris</text><rect class="b-mute" x="116" y="265" width="200.9" height="16" rx="4"/><text class="c-val" x="323" y="278">9.80%</text>
           </svg>
           <figcaption>The best marketer in the group also had the lowest losses. Source: case exhibit 9, compiled from annual reports.</figcaption>
         </figure>
@@ -404,10 +505,13 @@ footer p { margin: 0 0 6px; }
         <li><strong>Check the agents.</strong> Capital One's multi-agent assistant for auto dealers reports up to 55% gains in lead conversion (company-reported), and includes an evaluator agent that checks every plan against policy before it runs.</li>
         <li><strong>Buy speed, own learning.</strong> The $5.15B Brex purchase in April 2026 bought an AI-native platform. The data and underwriting stayed its own.</li>
       </ul>
-      <p>Swap underwriting for technology and the story reads as if it were written for today. The better your marketing, the better your technology. The better your technology, the better your marketing.</p>
+      <div class="statement">
+        <p>Swap underwriting for technology and the story reads as if it were written for today. <em>The better your marketing, the better your technology. The better your technology, the better your marketing.</em></p>
+      </div>
     </section>
 
-    <section id="audit">
+    <section class="sec" id="audit">
+      <p class="kicker">Put it to work</p>
       <h2>Score your own ratio in a week</h2>
       <p>You do not need a data science team to start. Six numbers give a baseline, and the direction of travel matters more than the first reading.</p>
 
@@ -427,18 +531,19 @@ footer p { margin: 0 0 6px; }
       <p>Then report one ratio, such as pipeline value per dollar of cost to serve, so neither marketing nor IT can hide behind its own metric.</p>
       <p>Roundtable's results show what moving both sides looks like:</p>
       <div class="stats">
-        <div class="stat"><b>125%</b><span>more leads for ZMC &amp; Associates</span></div>
-        <div class="stat"><b>42%</b><span>ROAS improvement for ZMC &amp; Associates</span></div>
-        <div class="stat"><b>3&times;</b><span>faster follow-up for the sales team of a $300M distributor</span></div>
+        <div class="stat"><b data-to="125" data-suf="%">125%</b><span>more leads for ZMC &amp; Associates</span></div>
+        <div class="stat"><b data-to="42" data-suf="%">42%</b><span>ROAS improvement for ZMC &amp; Associates</span></div>
+        <div class="stat"><b data-to="3" data-suf="&times;">3&times;</b><span>faster follow-up for the sales team of a $300M distributor</span></div>
       </div>
     </section>
 
-    <section id="owner">
+    <section class="sec" id="owner">
+      <p class="kicker">The inside owner</p>
       <h2>Who owns the ratio</h2>
       <p>Every client needs one person or team inside the company who answers for both marketing and technology. Without that owner, the loop stops when the outside adviser leaves.</p>
       <p>Capital One's founders learned this the hard way. They began as consultants, but the bank that hired them judged the idea too radical for outsiders to carry out. They had to join full time, and they made their acceptance conditional on controlling strategy, marketing and IT, with technologists working beside analysts and marketers under one leader.</p>
       <p>For firms that work from the outside, the equivalent is an owner on the client side with four responsibilities:</p>
-      <ol>
+      <ol class="steps">
         <li><strong>The shared scorecard.</strong> One ratio that neither marketing nor IT can hide behind.</li>
         <li><strong>The test register.</strong> Every test logged with its decision rule and result, failures included. Booking.com keeps exactly this record, and runs over 1,000 experiments at once.</li>
         <li><strong>The data foundation.</strong> One customer record that marketing, sales and technology all trust.</li>
@@ -447,9 +552,10 @@ footer p { margin: 0 0 6px; }
       <p>The outside partner designs the loop and trains the team. The inside owner keeps it running.</p>
     </section>
 
-    <section id="practices">
+    <section class="sec" id="practices">
+      <p class="kicker">Rules and pilot</p>
       <h2>Seven rules and a first pilot</h2>
-      <ol>
+      <ol class="steps">
         <li><strong>Build the data foundation before scaling AI.</strong></li>
         <li><strong>Keep one customer record,</strong> so marketing sees what sales closed and technology sees what marketing promised.</li>
         <li><strong>Make every campaign a test</strong> with one question, one owner and a decision rule set before launch.</li>
@@ -470,7 +576,8 @@ footer p { margin: 0 0 6px; }
       </ul>
     </section>
 
-    <section id="roundtable">
+    <section class="sec" id="roundtable">
+      <p class="kicker">Roundtable</p>
       <h2>How Roundtable puts this to work</h2>
       <p>Roundtable's capabilities already match the loop. Each gets one upgrade, and the positioning is explicit: marketing is the numerator, technology is the denominator, and we improve both together.</p>
       <div class="tablewrap">
@@ -486,15 +593,11 @@ footer p { margin: 0 0 6px; }
           </tbody>
         </table>
       </div>
-    </section>
 
-    <section id="care">
-      <h2>A note on the analogy</h2>
-      <p>The link between marketing, technology and Capital One's underwriting is our analogy, not Capital One's own claim. Its scale of 36,000 tests a year is not a client's scale, so pilot smaller with the same discipline. Several figures are company-reported, and Capital One's record after 2000 includes a serious breach and integration that ran slower than announced.</p>
-    </section>
+      <h3>A note on the analogy</h3>
+      <p class="note">The link between marketing, technology and Capital One's underwriting is our analogy, not Capital One's own claim. Its scale of 36,000 tests a year is not a client's scale, so pilot smaller with the same discipline. Several figures are company-reported, and Capital One's record after 2000 includes a serious breach and integration that ran slower than announced.</p>
 
-    <section id="sources">
-      <h2>Sources</h2>
+      <h3>Sources</h3>
       <ul class="note">
         <li>Harvard Business School case 9-700-124, "Capital One Financial Corporation" (rev. May 2001). Readers should obtain their own licensed copy.</li>
         <li>Roundtable Growth Partners, executive summary (updated November 3, 2026), which draws on Capital One announcements (Brex, Discover), VentureBeat on multi-agent workflows, SiliconANGLE on the cloud move, FinTech Futures on the OCC penalty, the Gartner 2026 CMO Spend Survey, and company reporting on Progressive, Booking.com, Netflix, Amazon, Starbucks and Klarna.</li>
@@ -502,14 +605,94 @@ footer p { margin: 0 0 6px; }
       </ul>
     </section>
 
-  </div>
-</main>
+  </main>
+</div>
 
 <footer class="gutter">
-  <div class="inner">
-    <p><b>Roundtable Growth Partners</b></p>
-    <p>Marketing as Numerator, Technology as Denominator &middot; November 2026</p>
+  <div class="wrap">
+    <svg class="logo" viewBox="0 0 330 100" role="img" aria-label="Roundtable Growth Partners" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="3.5"/>
+      <circle class="lg-dot" cx="50" cy="6" r="5.5"/>
+      <text x="50" y="61" text-anchor="middle" font-family="Manrope,Inter,sans-serif" font-size="30" font-weight="800" fill="currentColor" letter-spacing=".5">RGP</text>
+      <text x="112" y="52" font-family="Manrope,Inter,sans-serif" font-size="33" font-weight="800" fill="currentColor">Roundtable</text>
+      <text class="lg-sub" x="113" y="76" font-family="Inter,system-ui,Arial,sans-serif" font-size="13.5" letter-spacing="4.2" font-weight="600">GROWTH PARTNERS</text>
+    </svg>
+    <span>Marketing as Numerator, Technology as Denominator &middot; November 2026</span>
   </div>
 </footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function clamp(x) { return Math.max(0, Math.min(1, x)); }
+  function ease(x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
+
+  /* Hero ratio card: one time function drives both bars and the number */
+  var n = document.getElementById('barN'), d = document.getElementById('barD'), r = document.getElementById('ratio');
+  function draw(num, den) {
+    n.style.width = (num / 130 * 100) + '%';
+    d.style.width = (den / 130 * 100) + '%';
+    r.textContent = (num / den).toFixed(2) + '×';
+  }
+  if (n && d && r) {
+    if (reduce) { draw(120, 80); }
+    else {
+      var T = 8, t0 = performance.now();
+      var frame = function (now) {
+        var s = ((now - t0) / 1000) % T;
+        var back = 1 - ease(clamp(s - 7));
+        var a = ease(clamp((s - 0.8) / 2)) * back;
+        var b = ease(clamp((s - 2.8) / 2)) * back;
+        draw(100 + 20 * a, 100 - 20 * b);
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    }
+  }
+
+  /* Reading progress */
+  var prog = document.getElementById('prog');
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (prog && h > 0) prog.style.transform = 'scaleX(' + clamp(window.scrollY / h) + ')';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Section guide: highlight the section in view */
+  if ('IntersectionObserver' in window) {
+    var links = {};
+    document.querySelectorAll('.toc a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    var so = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && links[e.target.id]) {
+          Object.keys(links).forEach(function (k) { links[k].classList.remove('on'); });
+          links[e.target.id].classList.add('on');
+        }
+      });
+    }, { rootMargin: '-25% 0px -65% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { so.observe(s); });
+
+    /* Count-up numbers: the final value is already in the markup */
+    if (!reduce) {
+      var co = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          co.unobserve(e.target);
+          var el = e.target, to = parseFloat(el.getAttribute('data-to')), dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+          var suf = el.getAttribute('data-suf') || '', t1 = performance.now(), dur = 1300;
+          var step = function (now) {
+            var p = clamp((now - t1) / dur), v = to * (1 - Math.pow(1 - p, 3));
+            el.textContent = v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf;
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+      }, { threshold: 0.6 });
+      document.querySelectorAll('.stat b[data-to]').forEach(function (b) { co.observe(b); });
+    }
+  }
+})();
+</script>
 
 </body></html>
